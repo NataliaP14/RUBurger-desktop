@@ -1,5 +1,8 @@
 package com.example.project4ruburger.model;
 
+/**
+ * @author Natalia Peguero, Olivia Kamau
+ */
 public class Combo extends MenuItem {
 	private Sandwich sandwich;
 	private Beverage drink;
