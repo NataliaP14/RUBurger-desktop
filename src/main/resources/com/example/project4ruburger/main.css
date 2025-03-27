@@ -1,0 +1,20 @@
+
+.header-title {
+    -fx-fill: white;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.header-subtitle {
+}
+
+.rectangle:hover > Rectangle {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-transition: 1.0s ease-in-out;
+}
+
+.rectangle {
+    cursor:pointer;
+}
+

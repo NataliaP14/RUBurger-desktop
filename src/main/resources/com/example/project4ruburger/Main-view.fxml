@@ -1,16 +1,110 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.project4ruburger.controller.MainController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.VBox?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" stylesheets="@main.css" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project4ruburger.controller.MainController">
+
+    <top>
+        <HBox spacing="10.0" style="-fx-background-color: #333;">
+            <padding>
+                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </padding>
+
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="header-title" text="RU Burger">
+                <font>
+                    <Font name="System Bold" size="24.0" />
+                </font>
+            </Text>
+
+            <Region HBox.hgrow="ALWAYS" />
+
+            <Button fx:id = "cart" text="Cart" onAction="#goToCart" />
+            <Button fx:id = "orders" text="My Orders" onAction="#goToOrders"/>
+        </HBox>
+    </top>
+
+
+    <center>
+        <VBox alignment="CENTER" spacing="20" >
+            <padding>
+                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </padding>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="header-subtitle" text="Welcome to RU Burger!">
+                <font>
+                    <Font name="System Bold" size="24.0" />
+                </font>
+            </Text>
+
+            <GridPane alignment="CENTER" hgap="20" vgap="20">
+                <padding>
+                    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                </padding>
+
+                <StackPane fx:id="burgerBox" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <Rectangle fill="whitesmoke" height="325" width="275" arcWidth="40" arcHeight="40">
+                        <effect>
+                            <DropShadow radius="5" offsetX="5" offsetY="5" color="rgba(0, 0, 0, 0.4)" />
+                        </effect>
+                    </Rectangle>
+                    <Label text="Burger" />
+                </StackPane>
+
+                <StackPane fx:id = "sandwichBox" GridPane.columnIndex="1" GridPane.rowIndex="0" >
+                    <Rectangle fill="whitesmoke" height="325" width="275" arcWidth="40" arcHeight="40">
+                        <effect>
+                            <DropShadow radius="5" offsetX="5" offsetY="5" color="rgba(0, 0, 0, 0.4)" />
+                        </effect>
+                    </Rectangle>
+                    <Label text="Sandwich" />
+                </StackPane>
+
+                <StackPane fx:id = "beverageBox" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <Rectangle fill="whitesmoke" height="325" width="275" arcWidth="40" arcHeight="40">
+                        <effect>
+                            <DropShadow radius="5" offsetX="5" offsetY="5" color="rgba(0, 0, 0, 0.4)" />
+                        </effect>
+                    </Rectangle>
+                    <Label text="Beverage" />
+                </StackPane>
+
+                <StackPane fx:id = "sideBox" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <Rectangle fill="whitesmoke" height="325" width="275" arcWidth="40" arcHeight="40">
+                        <effect>
+                            <DropShadow radius="5" offsetX="5" offsetY="5" color="rgba(0, 0, 0, 0.4)" />
+                        </effect>
+                    </Rectangle>
+                    <Label text="Side" />
+                </StackPane>
+
+                <columnConstraints>
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints />
+                    <RowConstraints />
+                </rowConstraints>
+            </GridPane>
+        </VBox>
+
+    </center>
+
+    <bottom>
+
+    </bottom>
+
+</BorderPane>
