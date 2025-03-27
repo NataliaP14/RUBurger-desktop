@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 public class Burger extends Sandwich {
 	private boolean doublePatty;
+	private static final double DOUBLE_PATTY_PRICE = 2.50;
 
 	/**
 	 *
@@ -21,11 +22,46 @@ public class Burger extends Sandwich {
 	}
 
 	/**
-	 *
-	 * @return
+	 * Calculates the total price for the burger depending on the user's selections.
+	 * @return   The total price for the burger.
 	 */
 	@Override
 	public double price() {
-		return 0;
+
+		double totalPrice = super.price();
+
+		if(doublePatty) {
+			totalPrice += DOUBLE_PATTY_PRICE;
+		}
+
+		return totalPrice;
+
 	}
+
+	/**
+	 *  Returns a string representation of the user's burger order.
+	 *  @return   String with the user's burger details.
+	 */
+	@Override
+	public String toString() {
+
+		String addOnsString;
+
+		if (addOns.isEmpty()) {
+			addOnsString = "None";
+		} else {
+			addOnsString = "";
+			for (int i = 0; i < addOns.size(); i++) {
+				addOnsString += addOns.get(i).name();
+				if (i < addOns.size() - 1) {
+					addOnsString += ", ";
+				}
+			}
+		}
+
+		String pattyType = doublePatty ? "double" : "single";
+
+		return String.format("Burger, %s [%s] [%s] [%.2f] [%d]", pattyType, bread, addOnsString, price(), quantity);
+	}
+
 }

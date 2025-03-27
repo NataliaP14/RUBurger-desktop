@@ -8,5 +8,5 @@ public enum Bread {
 	WHEAT_BREAD,
 	PRETZEL,
 	BAGEL,
-	SOURDOUGH
+	SOURDOUGH;
 }
