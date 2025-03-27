@@ -11,6 +11,14 @@ public class Order {
 
 	public Order (int number, ArrayList<MenuItem> items) {
 		this.number = number;
-		this.items = items;
+		this.items = new ArrayList<>();
+
 	}
+
+	/*public int testMethod() {
+		for(MenuItem item: items) {
+			total += item.price();
+		}
+		return 0;
+	} */
 }
