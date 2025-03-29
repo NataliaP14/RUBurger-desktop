@@ -18,3 +18,41 @@
     cursor:pointer;
 }
 
+.number {
+    -fx-font-size: 20;
+}
+
+.radio-button .radio {
+
+
+}
+
+.radio-button:selected .dot {
+
+}
+
+.check-box .box {
+-fx-background-color: transparent;
+-fx-border-color:black;
+-fx-border-radius:3px;
+-fx-border-width: 2px;
+
+}
+
+.check-box:selected .mark {
+
+-fx-background-color: white;
+
+}
+
+.check-box:selected .box {
+
+-fx-background-color: #28a3f4;
+}
+
+
+
+
+
+
+
