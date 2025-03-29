@@ -3,6 +3,8 @@ package com.example.project4ruburger.model;
 import java.util.ArrayList;
 
 /**
+ * This class represents a sandwich object on the menu.
+ * It handles the sandwich bread, protein, add-ons, quantity and price.
  * @author Natalia Peguero, Olivia Kamau
  */
 public class Sandwich extends MenuItem {
@@ -12,11 +14,12 @@ public class Sandwich extends MenuItem {
 
 
 	/**
-	 *
-	 * @param quantity
-	 * @param bread
-	 * @param protein
-	 * @param addOns
+	 *Constructs a sandwich object with the user's bread, protein, addon and
+	 * quantity selections.
+	 * @param quantity	The number of sandwiches ordered by the user.
+	 * @param bread		The type of bread chosen by the user.
+	 * @param protein	The type of protein selected.
+	 * @param addOns	The addons chosen by the user.
 	 */
 	public Sandwich(int quantity, Bread bread, Protein protein, ArrayList<AddOns> addOns) {
 		super(quantity);
@@ -39,15 +42,26 @@ public class Sandwich extends MenuItem {
 		return totalPrice;
 	}
 
-
+	/**
+	 * Gets the type of bread chosen by the user.
+	 * @return	The specific type of bread selected by the user.
+	 */
 	public Bread getBread() {
 		return bread;
 	}
 
+	/**
+	 * Gets the protein choice of the user.
+	 * @return	The choice of protein selected by the user.
+	 */
 	public Protein getProtein() {
 		return protein;
 	}
 
+	/**
+	 * Gets the list of add-ons selected by the user.
+	 * @return	A list of add-ons chosen by the user.
+	 */
 	public ArrayList<AddOns> getAddOns() {
 		return addOns;
 	}

@@ -5,11 +5,16 @@ package com.example.project4ruburger.model;
  */
 public abstract class MenuItem {
 	protected int quantity;
+
+	/**
+	 * Gets the price of the menu item.
+	 * @return	The price of the menu item.
+	 */
 	public abstract double price();
 
 	/**
-	 *
-	 * @param quantity
+	 *	Constructs a menu item with the specified quantity.
+	 * @param quantity	The quantity of each menu item.
 	 */
 	public MenuItem(int quantity) {
 		this.quantity = quantity;

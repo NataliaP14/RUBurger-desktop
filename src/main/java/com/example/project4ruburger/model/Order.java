@@ -6,6 +6,10 @@ import java.io.IOException;
 
 
 /**
+ * This class represents an order made my the customer. It gets the order number
+ * for each order, starts a new order, adds/removes items from the order, updates the
+ * dynamic price and calculates the total price of the order using the subtotal and
+ * NJ sales tax.
  * @author Natalia Peguero, Olivia Kamau
  */
 public class Order {
@@ -43,6 +47,10 @@ public class Order {
 		return new Order(orderCount);
 	}
 
+	/**
+	 * Updates the subtotal price after a user adds or removes an item from
+	 * their order.
+	 */
 	private void updatePrice() {
 		subPrice = 0;
 		for(MenuItem item : items) {
@@ -131,7 +139,7 @@ public class Order {
 	}
 
 	/* VERY IMPORTANT NOTE PLS DON'T FORGET PLS: FileWriter is for the model, FileChooser is
-		for the controller, so don't use FileChooser here.
+		for the controller, so don't use FileChooser here (use it in controller).
 	 */
 
 }

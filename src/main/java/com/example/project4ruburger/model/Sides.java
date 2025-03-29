@@ -1,5 +1,10 @@
 package com.example.project4ruburger.model;
 
+/**
+ * This class represents the side option on the menu. It allows the user to select a side,
+ * its size, the quantity and gets the price of the user's selection.
+ * @author Natalia Peguero, Olivia Kamau
+ */
 public class Sides extends MenuItem {
 
     private Side side;

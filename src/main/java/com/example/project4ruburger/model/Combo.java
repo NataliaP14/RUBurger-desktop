@@ -1,6 +1,8 @@
 package com.example.project4ruburger.model;
 
 /**
+ * This class represents a combo meal on the menu.
+ * It handles the drink, side and price of the combo meal.
  * @author Natalia Peguero, Olivia Kamau
  */
 public class Combo extends MenuItem {

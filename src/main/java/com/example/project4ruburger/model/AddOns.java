@@ -1,6 +1,8 @@
 package com.example.project4ruburger.model;
 
 /**
+ * This is an enum class for the add-ons that the user can pick when
+ * customizing their burger or sandwich. Each add-on has its associated price.
  * @author Natalia Peguero, Olivia Kamau
  */
 public enum AddOns {
@@ -13,16 +15,16 @@ public enum AddOns {
 	private double price;
 
 	/**
-	 *
-	 * @param price
+	 * Constructs and add-on with its specified price.
+	 * @param price		The price of the addon.
 	 */
 	AddOns(double price) {
 		this.price = price;
 	}
 
 	/**
-	 *
-	 * @return
+	 *Gets the price of the addon.
+	 * @return		The price of the specified addon.
 	 */
 	public double getPrice() {
 		return price;
