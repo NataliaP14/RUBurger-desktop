@@ -6,7 +6,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 
@@ -16,6 +21,16 @@ import java.io.IOException;
 public class BurgerController {
 	public Button cart;
 	public Button orders;
+	@FXML private Rectangle rectangle;
+	@FXML ImageView burgerIcon;
+	@FXML private Button combo;
+	@FXML private Button addToOrder;
+	@FXML private Label price;
+	@FXML private Label number;
+	@FXML private Button plus;
+	@FXML private ImageView plusIcon;
+	@FXML private Button minus;
+	@FXML private ImageView minusIcon;
 	@FXML private Button back;
 
 
@@ -44,5 +59,27 @@ public class BurgerController {
 	@FXML
 	private void goToOrders(ActionEvent actionEvent) {
 		loadScene("PlacedOrder-view.fxml", "RU Burger - Orders");
+	}
+
+	@FXML
+	private void uploadIcons(ImageView view, String file) {
+		String imagePath = getClass().getResource("/image/" + file).toExternalForm();
+		view.setImage(new Image(imagePath));
+	}
+
+	private void setUpIcons() {
+		minus.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+		plus.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+
+		uploadIcons(minusIcon, "Minus.png");
+		uploadIcons(plusIcon, "Plus.png");
+		uploadIcons(burgerIcon, "Burger.png");
+	}
+
+	@FXML
+	public void initialize() {
+		price.setText("Price: $6.99");
+		setUpIcons();
+
 	}
 }
