@@ -9,7 +9,7 @@ public class Order {
 	private int number;
 	private ArrayList<MenuItem> items;
 
-	public Order (int number, ArrayList<MenuItem> items) {
+	public Order (int number) {
 		this.number = number;
 		this.items = new ArrayList<>();
 

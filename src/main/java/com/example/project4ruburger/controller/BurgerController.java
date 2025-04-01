@@ -5,15 +5,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import com.example.project4ruburger.model.Bread;
+import com.example.project4ruburger.model.Burger;
+import com.example.project4ruburger.model.AddOns;
+import com.example.project4ruburger.model.Protein;
+
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * @author Natalia Peguero, Olivia Kamau
@@ -21,6 +25,13 @@ import java.io.IOException;
 public class BurgerController {
 	public Button cart;
 	public Button orders;
+	public CheckBox lettuce;
+	public CheckBox tomato;
+	public CheckBox onion;
+	public CheckBox avocado;
+	public CheckBox cheese;
+	@FXML private RadioButton singlePatty, doublePatty;
+	@FXML private RadioButton briocheBread, wheatBread, pretzelBread;
 	@FXML private Rectangle rectangle;
 	@FXML ImageView burgerIcon;
 	@FXML private Button combo;
@@ -32,6 +43,10 @@ public class BurgerController {
 	@FXML private Button minus;
 	@FXML private ImageView minusIcon;
 	@FXML private Button back;
+
+	private ToggleGroup patty = new ToggleGroup();
+	private ToggleGroup bread = new ToggleGroup();
+	private int quantity;
 
 
 	private void loadScene(String file, String title) {
@@ -76,10 +91,94 @@ public class BurgerController {
 		uploadIcons(burgerIcon, "Burger.png");
 	}
 
+	private void setUpToggle() {
+		singlePatty.setToggleGroup(patty);
+		doublePatty.setToggleGroup(patty);
+
+		briocheBread.setToggleGroup(bread);
+		wheatBread.setToggleGroup(bread);
+		pretzelBread.setToggleGroup(bread);
+	}
+
+	private void setUpButtons() {
+		singlePatty.setOnAction(this::priceUpdater);
+		doublePatty.setOnAction(this::priceUpdater);
+
+		plus.setOnAction(this::increase);
+		minus.setOnAction(this::decrease);
+	}
+
+	private void increase(ActionEvent actionEvent) {
+		quantity++;
+		updateQuantity();
+	}
+
+	private void decrease(ActionEvent actionEvent) {
+		if (quantity > 1) {
+			quantity--;
+		}
+		updateQuantity();
+	}
+
+	private void updateQuantity() {
+		number.setText(String.valueOf(quantity));
+	}
+
+	private Bread breadSelect() {
+		Bread bread = null;
+		if (briocheBread.isSelected()) {
+			bread = Bread.BRIOCHE;
+		} else if (wheatBread.isSelected()) {
+			bread = Bread.WHEAT_BREAD;
+		} else if (pretzelBread.isSelected()) {
+			bread = Bread.PRETZEL;
+		}
+		return bread;
+	}
+
+	private ArrayList<AddOns> addOnsSelect() {
+		ArrayList<AddOns> addOns = new ArrayList<>();
+
+		if (lettuce.isSelected()) {
+			addOns.add(AddOns.LETTUCE);
+		} else if (tomato.isSelected()) {
+			addOns.add(AddOns.TOMATOES);
+		} else if (onion.isSelected()) {
+			addOns.add(AddOns.ONIONS) ;
+		} else if (avocado.isSelected()) {
+			addOns.add(AddOns.AVOCADO);
+		} else if (cheese.isSelected()) {
+			addOns.add(AddOns.CHEESE);
+		}
+
+		return addOns;
+	}
+
+
+	private void priceUpdater(ActionEvent actionEvent) {
+		boolean isDouble = doublePatty.isSelected();
+
+		Bread bread = breadSelect();
+
+		ArrayList<AddOns> addOns = addOnsSelect();
+
+		Burger burger = new Burger(bread, addOns, quantity, isDouble);
+
+		double total = burger.price();
+
+		price.setText(String.format("Price: $%.2f", total));
+
+	}
+
+
 	@FXML
 	public void initialize() {
-		price.setText("Price: $6.99");
 		setUpIcons();
+		setUpToggle();
+		setUpButtons();
+
+		quantity = 1;
+		updateQuantity();
 
 	}
 }
