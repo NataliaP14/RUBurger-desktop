@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,6 +18,7 @@ import java.io.IOException;
 public class CurrentOrderController {
 	public Button cart;
 	public Button orders;
+	public TextArea placedOrderTextArea;
 	@FXML
 	private Button back;
 
@@ -45,5 +48,14 @@ public class CurrentOrderController {
 	@FXML
 	private void goToOrders(ActionEvent actionEvent) {
 		loadScene("PlacedOrder-view.fxml", "RU Burger - Orders");
+	}
+
+	public void selectOrder(MouseEvent mouseEvent) {
+	}
+
+	public void cancelOrder(ActionEvent actionEvent) {
+	}
+
+	public void placeOrder(ActionEvent actionEvent) {
 	}
 }
