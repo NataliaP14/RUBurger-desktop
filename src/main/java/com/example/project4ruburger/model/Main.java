@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import java.io.IOException;
 
 /**
+ * This is the driver class of our program containing the main method.
  * @author Natalia Peguero, Olivia Kamau
  */
 public class Main extends Application {

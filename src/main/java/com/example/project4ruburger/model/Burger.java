@@ -3,6 +3,8 @@ package com.example.project4ruburger.model;
 import java.util.ArrayList;
 
 /**
+ * This class represents a Burger item in the menu.
+ * It handles the burger bread, add-ons, quantity, patty selection and price.
  * @author Natalia Peguero, Olivia Kamau
  */
 public class Burger extends Sandwich {
@@ -10,11 +12,12 @@ public class Burger extends Sandwich {
 	private static final double DOUBLE_PATTY_PRICE = 2.50;
 
 	/**
-	 *
-	 * @param bread
-	 * @param addOns
-	 * @param quantity
-	 * @param doublePatty
+	 * Constructs a burger object with the user's choices.
+	 * @param bread		The user's choice of bread.
+	 * @param addOns	The add ons selected by the user.
+	 * @param quantity	The number of burgers in the order.
+	 * @param doublePatty	Returns true if the user selects a double patty,
+	 *                         otherwise returns false (if the user selects a single patty).
 	 */
 	public Burger(Bread bread, ArrayList<AddOns> addOns, int quantity, boolean doublePatty) {
 		super(quantity, bread, Protein.BEEF_PATTY, addOns);
