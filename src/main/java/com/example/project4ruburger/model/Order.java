@@ -24,6 +24,7 @@ public class Order {
 	 *  Constructs an order object with a unique order number.
 	 * @param number	The order number.
 	 */
+
 	public Order (int number) {
 		this.number = number;
 		this.items = new ArrayList<>();
