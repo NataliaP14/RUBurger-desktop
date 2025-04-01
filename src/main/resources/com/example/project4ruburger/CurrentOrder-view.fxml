@@ -16,6 +16,7 @@
 
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextArea?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" stylesheets="@main.css" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project4ruburger.controller.CurrentOrderController">
 
     <top>
@@ -44,6 +45,19 @@
                 <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
             </padding>
             <Button fx:id = "back" text="Main Menu" onAction="#backToMainMenu" />
+
+            <VBox spacing="5">
+                <Label fx:id="subtotal" text="Subtotal: $0.00"/>
+                <Label fx:id="salesTax" text="Sales Tax: $0.00"/>
+                <Label fx:id="totalAmount" text="Total: $0.00"/>
+            </VBox>
+
+            <TextArea fx:id="placedOrderTextArea" editable="false" prefHeight="500.0" prefWidth="600.0" promptText="Output will be displayed here...." wrapText="true" onMouseClicked="#selectOrder" />
+
+            <HBox spacing="10" alignment="CENTER">
+                <Button fx:id="cancelOrder" text="Cancel Order" onAction="#cancelOrder"/>
+                <Button fx:id="placeOrder" text="Place Order" onAction="#placeOrder"/>
+            </HBox>
         </VBox>
 
     </center>
