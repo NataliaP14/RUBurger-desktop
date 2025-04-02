@@ -170,7 +170,7 @@ public class SandwichController {
 
 		ArrayList<AddOns> addOns = addOnsSelect();
 
-		 Sandwich sandwich = new Sandwich(quantity, bread, protein, addOns);
+		Sandwich sandwich = new Sandwich(quantity, bread, protein, addOns);
 
 		double total = sandwich.price();
 
@@ -198,8 +198,9 @@ public class SandwichController {
 		quantity = 1;
 		updateQuantity();
 
-		ObservableList<Bread> branches = FXCollections.observableArrayList(Bread.values());
-		breadComboBox.setItems(branches);
+		ObservableList<Bread> breads = FXCollections.observableArrayList(Bread.values());
+		breadComboBox.setItems(breads);
+		breadComboBox.getSelectionModel().selectFirst();
 
 		breadComboBox.setButtonCell(new ListCell<Bread>() {
 			@Override
