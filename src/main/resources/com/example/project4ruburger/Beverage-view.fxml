@@ -4,18 +4,21 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ComboBox?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" stylesheets="@main.css" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project4ruburger.controller.BeverageController">
 
     <top>
@@ -32,20 +35,106 @@
 
             <Region HBox.hgrow="ALWAYS" />
 
-            <Button fx:id = "cart" text="Cart" onAction="#goToCart" />
-            <Button fx:id = "orders" text="My Orders" onAction="#goToOrders"/>
+            <Button fx:id = "cart" text="Cart" onAction="#goToCart" styleClass="nav-button"/>
+            <Button fx:id = "orders" text="My Orders" onAction="#goToOrders" styleClass="nav-button"/>
         </HBox>
     </top>
 
-
     <center>
-        <VBox spacing="20" >
-            <padding>
-                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
-            </padding>
-            <Button fx:id = "back" text="Main Menu" onAction="#backToMainMenu" />
-        </VBox>
+        <StackPane>
 
+            <VBox spacing="20">
+                <padding>
+                    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0"/>
+                </padding>
+                <Button fx:id="back" text="Main Menu" onAction="#backToMainMenu" styleClass="main-button"/>
+            </VBox>
+
+            <Rectangle fx:id="rectangle" width="800" height="400" fill="grey" arcWidth="40" arcHeight="40">
+                <effect>
+                    <DropShadow radius="5" offsetX="5" offsetY="5" color="rgba(0,0,0,0.4)"/>
+                </effect>
+            </Rectangle>
+
+            <VBox spacing="30" alignment="CENTER" maxWidth="900" maxHeight="400">
+                <padding>
+                    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0"/>
+                </padding>
+
+
+                <HBox spacing="50" alignment="CENTER" >
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <VBox spacing="10" alignment="CENTER" translateY="-20" translateX="25">
+                        <ImageView fx:id="beverageIcon" fitHeight="200" fitWidth="200" preserveRatio="true" pickOnBounds="true"/>
+                        <Label text="Beverages">
+                            <font>
+                                <Font name="System Bold" size="30.0"/>
+                            </font>
+                        </Label>
+                        <Label text="Choose Your Perfect Drink">
+                            <font>
+                                <Font name="System Bold" size="20.0"/>
+                            </font>
+                        </Label>
+                    </VBox>
+
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <VBox spacing="15" alignment="CENTER">
+
+                        <HBox alignment = "TOP_LEFT">
+                            <Label text="Select Flavor" styleClass="label">
+                                <font>
+                                    <Font name="System Bold" size="20.0"/>
+                                </font>
+                            </Label>
+                        </HBox>
+                        <HBox alignment="TOP_LEFT" spacing="10">
+                            <ComboBox fx:id="flavorComboBox" prefWidth="150.0" promptText="Flavors"/>
+                        </HBox>
+
+                        <HBox alignment = "TOP_LEFT">
+                            <Label text="Select Size" styleClass="label">
+                                <font>
+                                    <Font name="System Bold" size="20.0"/>
+                                </font>
+                            </Label>
+                        </HBox>
+                        <HBox alignment="TOP_LEFT" spacing="10">
+                            <ComboBox fx:id="sizeComboBox" prefWidth="150.0"/>
+                        </HBox>
+
+                        <HBox>
+                            <Button fx:id="minus" >
+                                <graphic>
+                                    <ImageView fx:id="minusIcon" fitHeight="20" fitWidth="20" preserveRatio="true" pickOnBounds="true"/>
+                                </graphic>
+                            </Button>
+
+                            <Label fx:id="number" text="1" styleClass="number"/>
+
+                            <Button fx:id="plus">
+                                <graphic>
+                                    <ImageView fx:id="plusIcon" fitHeight="20" fitWidth="20" preserveRatio="true" pickOnBounds="true"/>
+                                </graphic>
+                            </Button>
+                        </HBox>
+
+                        <HBox alignment="CENTER">
+                            <Label fx:id="price" minWidth="200">
+                                <font>
+                                    <Font name="System Bold" size="18.0"/>
+                                </font>
+                            </Label>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Button fx:id="addToOrder" text="Add To Order" styleClass="main-button"/>
+
+                        </HBox>
+                    </VBox>
+
+                    <Region HBox.hgrow="ALWAYS"/>
+                </HBox>
+            </VBox>
+        </StackPane>
     </center>
 
     <bottom>

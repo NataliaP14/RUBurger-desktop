@@ -56,7 +56,7 @@ public class Beverage extends MenuItem {
 				beveragePrice = BEVERAGE_LARGE_PRICE;
 				break;
 			default:
-				beveragePrice = 0;
+				beveragePrice = BEVERAGE_MEDIUM_PRICE;;
 		}
 		return beveragePrice * quantity;
 	}
