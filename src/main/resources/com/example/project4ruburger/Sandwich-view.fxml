@@ -78,7 +78,7 @@
                                 <Font name="System Bold" size="20.0"/>
                             </font>
                         </Label>
-                        <Button fx:id="combo" text="Make it a Combo" styleClass="main-button"/>
+                        <Button fx:id="combo" text="Make it a Combo" styleClass="main-button" onAction="#goToCombo"/>
                     </VBox>
 
                     <Region HBox.hgrow="ALWAYS"/>
