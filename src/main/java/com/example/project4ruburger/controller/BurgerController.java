@@ -101,8 +101,14 @@ public class BurgerController {
 	}
 
 	private void setUpButtons() {
-		singlePatty.setOnAction(this::priceUpdater);
-		doublePatty.setOnAction(this::priceUpdater);
+		singlePatty.setOnAction(e -> priceUpdater());
+		doublePatty.setOnAction(e -> priceUpdater());
+
+		lettuce.setOnAction(e -> priceUpdater());
+		tomato.setOnAction(e -> priceUpdater());
+		onion.setOnAction(e -> priceUpdater());
+		avocado.setOnAction(e -> priceUpdater());
+		cheese.setOnAction(e -> priceUpdater());
 
 		plus.setOnAction(this::increase);
 		minus.setOnAction(this::decrease);
@@ -122,6 +128,7 @@ public class BurgerController {
 
 	private void updateQuantity() {
 		number.setText(String.valueOf(quantity));
+		priceUpdater();
 	}
 
 	private Bread breadSelect() {
@@ -141,13 +148,13 @@ public class BurgerController {
 
 		if (lettuce.isSelected()) {
 			addOns.add(AddOns.LETTUCE);
-		} else if (tomato.isSelected()) {
+		} if (tomato.isSelected()) {
 			addOns.add(AddOns.TOMATOES);
-		} else if (onion.isSelected()) {
+		} if (onion.isSelected()) {
 			addOns.add(AddOns.ONIONS) ;
-		} else if (avocado.isSelected()) {
+		} if (avocado.isSelected()) {
 			addOns.add(AddOns.AVOCADO);
-		} else if (cheese.isSelected()) {
+		} if (cheese.isSelected()) {
 			addOns.add(AddOns.CHEESE);
 		}
 
@@ -155,15 +162,14 @@ public class BurgerController {
 	}
 
 
-	private void priceUpdater(ActionEvent actionEvent) {
+	private void priceUpdater() {
+
 		boolean isDouble = doublePatty.isSelected();
-
 		Bread bread = breadSelect();
-
 		ArrayList<AddOns> addOns = addOnsSelect();
+		//quantity = Integer.parseInt(number.getText());
 
 		Burger burger = new Burger(bread, addOns, quantity, isDouble);
-
 		double total = burger.price();
 
 		price.setText(String.format("Price: $%.2f", total));
