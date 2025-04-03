@@ -16,8 +16,7 @@ import java.io.IOException;
 public class ComboController {
 	public Button cart;
 	public Button orders;
-	@FXML
-	private Button back;
+	@FXML private Button back;
 
 
 	private void loadScene(String file, String title) {

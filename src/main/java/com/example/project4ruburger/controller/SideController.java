@@ -1,9 +1,6 @@
 package com.example.project4ruburger.controller;
 
-import com.example.project4ruburger.model.Sides;
-import com.example.project4ruburger.model.Side;
-import com.example.project4ruburger.model.Flavor;
-import com.example.project4ruburger.model.Size;
+import com.example.project4ruburger.model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -88,6 +86,8 @@ public class SideController {
 		sideComboBox.setOnAction(e->priceUpdater());
 		plus.setOnAction(this::increase);
 		minus.setOnAction(this::decrease);
+
+		addToOrder.setOnAction(this::addSideToOrder);
 	}
 
 	private void increase(ActionEvent actionEvent) {
@@ -122,6 +122,21 @@ public class SideController {
 
 		price.setText(String.format("Price: $%.2f", total));
 
+	}
+
+	@FXML
+	private void addSideToOrder(ActionEvent event) {
+		Side side = (Side) sideComboBox.getValue();
+		Size size = (Size) sizeComboBox.getValue();
+
+		Sides sides = new Sides(quantity, side, size);
+		CurrentOrderController.getCurrentOrder().addItem(sides);
+
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setTitle("Item Added");
+		alert.setHeaderText(null);
+		alert.setContentText("Side added to your order!");
+		alert.showAndWait();
 	}
 
 	@FXML

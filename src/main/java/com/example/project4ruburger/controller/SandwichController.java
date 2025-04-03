@@ -108,6 +108,8 @@ public class SandwichController {
 
 		plus.setOnAction(this::increase);
 		minus.setOnAction(this::decrease);
+
+		addToOrder.setOnAction(this::addSandwichToOrder);
 	}
 
 	private void increase(ActionEvent actionEvent) {
@@ -186,6 +188,23 @@ public class SandwichController {
 			case BAGEL -> "Bagel";
 			case SOURDOUGH -> "Sourdough";
 		};
+	}
+
+	@FXML
+	private void addSandwichToOrder(ActionEvent event) {
+		Protein protein = proteinSelect();
+		Bread bread = (Bread) breadComboBox.getValue();
+		ArrayList<AddOns> addOns = addOnsSelect();
+
+
+		Sandwich sandwich = new Sandwich(quantity, bread, protein, addOns);		// Create the sandwich with all selected options
+		CurrentOrderController.getCurrentOrder().addItem(sandwich);		// to add  burger to the current order using the static method
+
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setTitle("Item Added");
+		alert.setHeaderText(null);
+		alert.setContentText("Sandwich added to your order!");
+		alert.showAndWait();
 	}
 
 
