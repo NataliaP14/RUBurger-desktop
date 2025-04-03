@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 public class CurrentOrderController {
 	public Button cart;
 	public Button orders;
+	public ImageView backIcon;
 	@FXML private Button back;
 	@FXML private Button removeOrderItem, placedOrder;
 	@FXML private Label subtotal, salesTax, totalAmount;
@@ -81,7 +83,7 @@ public class CurrentOrderController {
 
 	@FXML
 	private void goToOrders(ActionEvent actionEvent) {
-		loadScene("CurrentOrder-view.fxml", "RU Burger - Orders");
+		loadScene("PlacedOrder-view.fxml", "RU Burger - Orders");
 	}
 
 	/*public void selectOrder(MouseEvent mouseEvent) {

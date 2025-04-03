@@ -22,52 +22,68 @@
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" stylesheets="@main.css" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project4ruburger.controller.ComboController">
 
     <top>
-        <HBox spacing="10.0" style="-fx-background-color: #333;">
+        <HBox spacing="10.0" styleClass="nav-background" prefHeight="50">
             <padding>
                 <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
             </padding>
 
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="header-title" text="RU Burger">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white;" text="RU Burger">
                 <font>
-                    <Font name="System Bold" size="24.0" />
+                    <Font name="Impact" size="28.0" />
                 </font>
             </Text>
 
             <Region HBox.hgrow="ALWAYS" />
 
             <Button fx:id = "cart" text="Cart" onAction="#goToCart" styleClass="nav-button"/>
-            <Button fx:id = "orders" text="My Orders" onAction="#goToOrders" styleClass="nav-button"/>
+            <Button fx:id = "orders" text="My Orders" onAction="#goToOrders" styleClass="nav-button" />
         </HBox>
     </top>
 
     <center>
         <StackPane>
+            <VBox fx:id="mainBackground" prefHeight="700" prefWidth="900" style="-fx-background-color: #f4f4f4;">
+                <children>
+                    <Button fx:id="back" onAction="#backToMainMenu" styleClass="main-button" text="Main Menu"
+                            translateX="15" translateY="20">
+                        <graphic>
+                            <ImageView fx:id="backIcon" fitHeight="20" fitWidth="20" preserveRatio="true"
+                                       pickOnBounds="true" />
+                        </graphic>
+                    </Button>
+                </children></VBox>
 
-            <VBox spacing="20">
-                <padding>
-                    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0"/>
-                </padding>
-                <Button fx:id="back" text="Main Menu" onAction="#backToMainMenu" styleClass="main-button"/>
-            </VBox>
-
-            <Rectangle fx:id="rectangle" width="800" height="400" fill="grey" arcWidth="40" arcHeight="40">
+            <Rectangle fx:id="rectangle" arcHeight="60" arcWidth="40" fill="white" height="400" width="800">
                 <effect>
-                    <DropShadow radius="5" offsetX="5" offsetY="5" color="rgba(0,0,0,0.4)"/>
+                    <DropShadow color="rgba(0,0,0,0.4)" offsetX="5" offsetY="5" radius="5" />
                 </effect>
             </Rectangle>
 
-            <VBox spacing="30" alignment="CENTER" maxWidth="900" maxHeight="400">
+            <VBox spacing="20" alignment="CENTER" maxWidth="900" maxHeight="400">
                 <padding>
                     <Insets bottom="10.0" left="20.0" right="20.0" top="10.0"/>
                 </padding>
+
+                <HBox alignment="TOP_LEFT"/>
+
+                <HBox alignment = "CENTER">
+                    <Label text="Sandwich Details" styleClass="label">
+                        <font>
+                            <Font name="Impact" size="20.0"/>
+                        </font>
+                    </Label>
+                </HBox>
+                <HBox alignment="CENTER" spacing="10">
+                    <Label fx:id="sandwichDetails" wrapText="true" styleClass="details"/>
+                </HBox>
 
                 <HBox spacing="50" alignment="CENTER" >
                     <Region HBox.hgrow="ALWAYS"/>
                     <VBox spacing="10" alignment="CENTER" translateY="-20" translateX="25">
-                        <ImageView fx:id="comboIcon" fitHeight="325" fitWidth="325" preserveRatio="true" pickOnBounds="true"/>
+                        <ImageView fx:id="comboIcon" fitHeight="250" fitWidth="250" preserveRatio="true" pickOnBounds="true"/>
                         <Label text="Combo">
                             <font>
-                                <Font name="System Bold" size="30.0"/>
+                                <Font name="Impact" size="30.0"/>
                             </font>
                         </Label>
                         <Label text="Customize Your Perfect Combo">
@@ -79,34 +95,24 @@
 
                     <Region HBox.hgrow="ALWAYS"/>
                     <VBox spacing="15" alignment="CENTER">
-                        <HBox alignment = "TOP_LEFT">
-                            <Label text="Sandwich Details" styleClass="label">
-                                <font>
-                                    <Font name="System Bold" size="20.0"/>
-                                </font>
-                            </Label>
-                        </HBox>
-                        <HBox alignment="TOP_LEFT" spacing="10">
-                            <Label fx:id="sandwichDetails" wrapText="true" styleClass="details"/>
-                        </HBox>
 
                         <HBox alignment="TOP_LEFT" spacing="50">
                             <VBox spacing="10">
                                 <Label text="Select Side" styleClass="label">
                                     <font>
-                                        <Font name="System Bold" size="20.0"/>
+                                        <Font name="Impact" size="20.0"/>
                                     </font>
                                 </Label>
                                 <ComboBox fx:id="sideComboBox" prefWidth="150.0" promptText="Flavors"/>
                             </VBox>
-                            <ImageView fx:id="sideIcon" fitHeight="100" fitWidth="100" preserveRatio="true" pickOnBounds="true"/>
+                            <ImageView fx:id="sideIcon" fitHeight="80" fitWidth="80" preserveRatio="true" pickOnBounds="true"/>
                         </HBox>
 
                         <HBox alignment="TOP_LEFT" spacing="50">
                             <VBox spacing="10">
                                 <Label text="Select Drink" styleClass="label">
                                     <font>
-                                        <Font name="System Bold" size="20.0"/>
+                                        <Font name="Impact" size="20.0"/>
                                     </font>
                                 </Label>
                                 <ComboBox fx:id="drinkComboBox" prefWidth="150.0"/>
@@ -133,11 +139,11 @@
                         <HBox alignment="CENTER">
                             <Label fx:id="price" minWidth="200">
                                 <font>
-                                    <Font name="System Bold" size="18.0"/>
+                                    <Font name="Impact" size="18.0"/>
                                 </font>
                             </Label>
                             <Region HBox.hgrow="ALWAYS"/>
-                            <Button fx:id="addToOrder" text="Add To Order" styleClass="main-button"/>
+                            <Button fx:id="addToOrder" text="Add To Order" styleClass="secondary-button"/>
 
                         </HBox>
                     </VBox>

@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -40,6 +41,8 @@ public class SandwichController {
 	public ImageView plusIcon;
 	public Label price;
 	public Button addToOrder;
+	public VBox mainBackground;
+	public ImageView backIcon;
 	@FXML private Button back;
 
 	ToggleGroup protein = new ToggleGroup();
@@ -122,6 +125,7 @@ public class SandwichController {
 		uploadIcons(minusIcon, "Minus.png");
 		uploadIcons(plusIcon, "Plus.png");
 		uploadIcons(sandwichIcon, "Sandwich.png");
+		uploadIcons(backIcon, "Left.png");
 	}
 
 	private void setUpToggle() {
@@ -268,6 +272,11 @@ public class SandwichController {
 				}
 			}
 		});
+
+		String imagePath = getClass().getResource("/image/brownBackground.jpg").toExternalForm();
+		mainBackground.setStyle("-fx-background-image: url('" + imagePath + "'); " +
+				"-fx-background-size: cover; " +
+				"-fx-background-position: center;");
 
 	}
 
