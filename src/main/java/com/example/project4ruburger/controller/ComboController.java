@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -124,6 +125,8 @@ public class ComboController {
 		});
 		plus.setOnAction(this::increase);
 		minus.setOnAction(this::decrease);
+
+		addToOrder.setOnAction(this::addComboToOrder);
 	}
 
 	private void increase(ActionEvent actionEvent) {
@@ -157,6 +160,23 @@ public class ComboController {
 
 		price.setText(String.format("Price: $%.2f", total));
 
+	}
+
+	@FXML
+	private void addComboToOrder(ActionEvent event) {
+		Sandwich sandwich = combo.getSandwich();
+		Side side = (Side) sideComboBox.getValue();
+		Flavor flavor = (Flavor) drinkComboBox.getValue();
+		Beverage drink = new Beverage(1, MEDIUM_DRINK, flavor);
+
+		Combo combo = new Combo(quantity, sandwich, drink, side);
+		CurrentOrderController.getCurrentOrder().addItem(combo);
+
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setTitle("Item Added");
+		alert.setHeaderText(null);
+		alert.setContentText("Side added to your order!");
+		alert.showAndWait();
 	}
 
 	@FXML
