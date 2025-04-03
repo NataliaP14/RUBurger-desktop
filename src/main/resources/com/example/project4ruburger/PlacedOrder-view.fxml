@@ -19,6 +19,7 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ListView?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" stylesheets="@main.css" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project4ruburger.controller.PlacedOrderController">
 
     <top>
@@ -49,27 +50,29 @@
             </padding>
             <Button fx:id = "back" text="Main Menu" onAction="#backToMainMenu" />
 
-            <!-- Order Management UI Buttons-->
-            <HBox spacing="10">
-                <Label text="Select an Order:"/>
-                <ComboBox fx:id="orderDropdown" />
-                <Region HBox.hgrow="ALWAYS"/>
-                <Label fx:id="totalAmount" text="Total: $0.00"/>
+            <HBox alignment="CENTER">
+                <Label text="Placed Orders" style="-fx-font-size: 36px; -fx-font-weight: bold;" />
             </HBox>
 
-            <Label text="Order Details:"/>
-            <TextArea fx:id="orderDetails" editable="false"/>
-
-
-
+            <Label text="Select an Order:"/>
             <HBox spacing="10">
+                <ComboBox fx:id="orderDropdown" />
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="totalAmount" text="Total: $0.00" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+            </HBox>
+
+            <ListView fx:id="orderDetails" editable="false" prefHeight="900"/>
+
+
+
+            <HBox spacing="40" alignment="CENTER">
                 <Button fx:id="cancelOrder" text="Cancel Order" />
                 <Button fx:id="exportOrder" text="Export Orders" />
             </HBox>
 
         </VBox>
 
-        <!-- hi-->
+
 
     </center>
 

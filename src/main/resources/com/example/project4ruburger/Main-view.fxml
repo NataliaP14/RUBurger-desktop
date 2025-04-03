@@ -16,36 +16,44 @@
 
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.effect.GaussianBlur?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.ImageView?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" stylesheets="@main.css" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project4ruburger.controller.MainController">
 
     <top>
-        <HBox spacing="10.0" style="-fx-background-color: #333;">
+        <HBox spacing="10.0" styleClass="nav-background" prefHeight="80">
             <padding>
                 <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
             </padding>
 
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="header-title" text="RU Burger">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white;" text="RU Burger">
                 <font>
-                    <Font name="System Bold" size="24.0" />
+                    <Font name="Impact" size="28.0" />
                 </font>
             </Text>
 
             <Region HBox.hgrow="ALWAYS" />
 
-            <Button fx:id = "cart" text="Cart" onAction="#goToCart" />
-            <Button fx:id = "orders" text="My Orders" onAction="#goToOrders"/>
+            <Button fx:id = "cart" text="Cart" onAction="#goToCart" styleClass="nav-button"/>
+            <Button fx:id = "orders" text="My Orders" onAction="#goToOrders" styleClass="nav-button" />
         </HBox>
     </top>
 
 
     <center>
-        <VBox alignment="CENTER" spacing="20" >
+        <VBox fx:id = "mainBackground" alignment="CENTER" spacing="20" styleClass="main-background" maxHeight="600">
             <padding>
-                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                <Insets bottom="30.0" left="20.0" right="20.0" top="50.0" />
             </padding>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="header-subtitle" text="Welcome to RU Burger!">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="main-title" text="Welcome to RU Burger!" style="-fx-fill: white;">
                 <font>
-                    <Font name="System Bold" size="24.0" />
+                    <Font name="Impact" size="36.0" />
+                </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="main-subtitle" text="Savor the Flavor with Every Bite" style="-fx-fill: white;">
+                <font>
+                    <Font name="Helvetica" size="16.0" />
                 </font>
             </Text>
 
@@ -55,39 +63,57 @@
                 </padding>
 
                 <StackPane fx:id="burgerBox" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                    <Rectangle fill="whitesmoke" height="325" width="275" arcWidth="40" arcHeight="40">
+                    <Rectangle fill="#fffefa" height="275" width="350" arcWidth="30" arcHeight="30">
                         <effect>
-                            <DropShadow radius="5" offsetX="5" offsetY="5" color="rgba(0, 0, 0, 0.4)" />
+                            <DropShadow radius="5" offsetX="5" offsetY="5" color="rgba(255, 255, 255, 0.4)" />
                         </effect>
                     </Rectangle>
-                    <Label text="Burger" />
+                    <VBox alignment="CENTER" spacing="5">
+                        <ImageView fx:id="burgerIcon" fitHeight="200" fitWidth="200" preserveRatio="true" pickOnBounds="true"/>
+                        <Label text="Burger" styleClass="rectangle-title"  />
+                        <Label text="Delicious burgers with fresh ingredients." style="-fx-font-size: 14px; -fx-font-weight: normal;" />
+                    </VBox>
                 </StackPane>
 
+
                 <StackPane fx:id = "sandwichBox" GridPane.columnIndex="1" GridPane.rowIndex="0" >
-                    <Rectangle fill="whitesmoke" height="325" width="275" arcWidth="40" arcHeight="40">
+                    <Rectangle fx:id="sandwichRectangle" fill="#fffefa" height="275" width="350" arcWidth="40" arcHeight="40">
                         <effect>
-                            <DropShadow radius="5" offsetX="5" offsetY="5" color="rgba(0, 0, 0, 0.4)" />
+                            <DropShadow radius="5" offsetX="5" offsetY="5" color="rgba(255, 255, 255, 0.4)" />
                         </effect>
                     </Rectangle>
-                    <Label text="Sandwich" />
+
+                    <VBox alignment="CENTER" spacing="5">
+                        <ImageView fx:id="sandwichIcon" fitHeight="200" fitWidth="200" preserveRatio="true" pickOnBounds="true"/>
+                        <Label text="Sandwich" styleClass="rectangle-title" />
+                        <Label text="Tasty sandwiches with a variety of fillings." style="-fx-font-size: 14px; -fx-font-weight: normal;" />
+                    </VBox>
                 </StackPane>
 
                 <StackPane fx:id = "beverageBox" GridPane.columnIndex="0" GridPane.rowIndex="1">
-                    <Rectangle fill="whitesmoke" height="325" width="275" arcWidth="40" arcHeight="40">
+                    <Rectangle fill="#fffefa" height="275" width="350" arcWidth="40" arcHeight="40">
                         <effect>
-                            <DropShadow radius="5" offsetX="5" offsetY="5" color="rgba(0, 0, 0, 0.4)" />
+                            <DropShadow radius="5" offsetX="5" offsetY="5" color="rgba(255, 255, 255, 0.4)" />
                         </effect>
                     </Rectangle>
-                    <Label text="Beverage" />
+                    <VBox alignment="CENTER" spacing="5">
+                        <ImageView fx:id="beverageIcon" fitHeight="200" fitWidth="200" preserveRatio="true" pickOnBounds="true"/>
+                        <Label text="Beverage" styleClass="rectangle-title"  />
+                        <Label text="Refreshing drinks to complement your meal." style="-fx-font-size: 14px; -fx-font-weight: normal;" />
+                    </VBox>
                 </StackPane>
 
                 <StackPane fx:id = "sideBox" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                    <Rectangle fill="whitesmoke" height="325" width="275" arcWidth="40" arcHeight="40">
+                    <Rectangle fill="#fffefa" height="275" width="350" arcWidth="40" arcHeight="40">
                         <effect>
-                            <DropShadow radius="5" offsetX="5" offsetY="5" color="rgba(0, 0, 0, 0.4)" />
+                            <DropShadow radius="5" offsetX="5" offsetY="5" color="rgba(255, 255, 255, 0.4)"/>
                         </effect>
                     </Rectangle>
-                    <Label text="Side" />
+                    <VBox alignment="CENTER" spacing="5">
+                        <ImageView fx:id="sideIcon" fitHeight="150" fitWidth="150" preserveRatio="true" pickOnBounds="true"/>
+                        <Label text="Side" styleClass="rectangle-title" />
+                        <Label text="Delicious sides to complete your meal." style="-fx-font-size: 14px; -fx-font-weight: normal;" />
+                    </VBox>
                 </StackPane>
 
                 <columnConstraints>
