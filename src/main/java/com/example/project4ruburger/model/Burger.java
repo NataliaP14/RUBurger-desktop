@@ -37,6 +37,11 @@ public class Burger extends Sandwich {
 			totalPrice += DOUBLE_PATTY_PRICE;
 		}
 
+		for (AddOns addOn : addOns) {
+
+			totalPrice += addOn.getPrice();
+		}
+
 		return totalPrice;
 
 	}
