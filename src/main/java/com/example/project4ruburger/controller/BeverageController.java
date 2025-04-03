@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -32,6 +33,8 @@ public class BeverageController {
 	public ImageView plusIcon;
 	public Label price;
 	public Button addToOrder;
+	public VBox mainBackground;
+	public ImageView backIcon;
 	@FXML private Button back;
 
 
@@ -78,6 +81,7 @@ public class BeverageController {
 		uploadIcons(minusIcon, "Minus.png");
 		uploadIcons(plusIcon, "Plus.png");
 		uploadIcons(beverageIcon, "Beverages.png");
+		uploadIcons(backIcon, "Left.png");
 	}
 
 	private void setUpButtons() {
@@ -156,6 +160,11 @@ public class BeverageController {
 		flavorComboBox.getSelectionModel().selectFirst();
 
 		priceUpdater();
+
+		String imagePath = getClass().getResource("/image/brownBackground.jpg").toExternalForm();
+		mainBackground.setStyle("-fx-background-image: url('" + imagePath + "'); " +
+				"-fx-background-size: cover; " +
+				"-fx-background-position: center;");
 
 	}
 }

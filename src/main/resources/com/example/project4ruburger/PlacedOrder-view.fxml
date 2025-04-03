@@ -20,25 +20,25 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.ImageView?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" stylesheets="@main.css" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project4ruburger.controller.PlacedOrderController">
 
     <top>
-        <HBox spacing="10.0" style="-fx-background-color: #333;">
+        <HBox spacing="10.0" styleClass="nav-background" prefHeight="50">
             <padding>
                 <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
             </padding>
 
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="header-title" text="RU Burger">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white;" text="RU Burger">
                 <font>
-                    <Font name="System Bold" size="24.0" />
+                    <Font name="Impact" size="28.0" />
                 </font>
             </Text>
 
             <Region HBox.hgrow="ALWAYS" />
 
-            <Button fx:id = "cart" text="Cart" onAction="#goToCart" />
-            <Button fx:id = "orders" text="My Orders" onAction="#goToOrders"/>
-
+            <Button fx:id = "cart" text="Cart" onAction="#goToCart" styleClass="nav-button"/>
+            <Button fx:id = "orders" text="My Orders" onAction="#goToOrders" styleClass="nav-button" />
         </HBox>
     </top>
 
@@ -48,7 +48,13 @@
             <padding>
                 <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
             </padding>
-            <Button fx:id = "back" text="Main Menu" onAction="#backToMainMenu" />
+            <Button fx:id="back" onAction="#backToMainMenu" styleClass="main-button" text="Main Menu"
+                    translateX="15" translateY="20">
+                <graphic>
+                    <ImageView fx:id="backIcon" fitHeight="20" fitWidth="20" preserveRatio="true"
+                               pickOnBounds="true" />
+                </graphic>
+            </Button>
 
             <HBox alignment="CENTER">
                 <Label text="Placed Orders" style="-fx-font-size: 36px; -fx-font-weight: bold;" />

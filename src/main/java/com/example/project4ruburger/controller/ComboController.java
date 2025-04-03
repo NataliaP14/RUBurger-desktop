@@ -14,6 +14,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -37,6 +38,8 @@ public class ComboController {
 	public Button addToOrder;
 	public ImageView comboIcon;
 	public Label sandwichDetails;
+	public VBox mainBackground;
+	public ImageView backIcon;
 	@FXML private Button back;
 
 	private int quantity;
@@ -93,6 +96,7 @@ public class ComboController {
 		uploadIcons(drinkIcon, "Cola.png");
 		uploadIcons(sideIcon, "Chips.png");
 		uploadIcons(comboIcon, "Combo.png");
+		uploadIcons(backIcon, "Left.png");
 
 	}
 
@@ -197,7 +201,10 @@ public class ComboController {
 		sideComboBox.setItems(side);
 		sideComboBox.getSelectionModel().select(Side.CHIPS);
 
-
+		String imagePath = getClass().getResource("/image/brownBackground.jpg").toExternalForm();
+		mainBackground.setStyle("-fx-background-image: url('" + imagePath + "'); " +
+				"-fx-background-size: cover; " +
+				"-fx-background-position: center;");
 
 	}
 

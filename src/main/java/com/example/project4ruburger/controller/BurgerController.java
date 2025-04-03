@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
@@ -27,6 +28,8 @@ public class BurgerController {
 	public CheckBox onion;
 	public CheckBox avocado;
 	public CheckBox cheese;
+	public VBox mainBackground;
+	public ImageView backIcon;
 	@FXML private RadioButton singlePatty, doublePatty;
 	@FXML private RadioButton briocheBread, wheatBread, pretzelBread;
 	@FXML private Rectangle rectangle;
@@ -120,6 +123,7 @@ public class BurgerController {
 		uploadIcons(minusIcon, "Minus.png");
 		uploadIcons(plusIcon, "Plus.png");
 		uploadIcons(burgerIcon, "Burger.png");
+		uploadIcons(backIcon, "Left.png");
 	}
 
 	private void setUpToggle() {
@@ -237,6 +241,11 @@ public class BurgerController {
 
 		quantity = 1;
 		updateQuantity();
+
+		String imagePath = getClass().getResource("/image/brownBackground.jpg").toExternalForm();
+		mainBackground.setStyle("-fx-background-image: url('" + imagePath + "'); " +
+				"-fx-background-size: cover; " +
+				"-fx-background-position: center;");
 
 	}
 }
