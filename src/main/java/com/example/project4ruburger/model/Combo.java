@@ -45,7 +45,6 @@ public class Combo extends MenuItem {
 	 */
 	public Side getSide() { return side; }
 
-
 	/**
 	 *  Sets the price for a combo meal (+$2 to the current price).
 	 * 	@return		The price of the combo meal

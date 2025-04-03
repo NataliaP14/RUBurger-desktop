@@ -1,5 +1,6 @@
 package com.example.project4ruburger.controller;
 
+import com.example.project4ruburger.model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,10 +11,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
-import com.example.project4ruburger.model.Bread;
-import com.example.project4ruburger.model.Burger;
-import com.example.project4ruburger.model.AddOns;
-import com.example.project4ruburger.model.Protein;
 
 
 import java.io.IOException;
@@ -48,7 +45,6 @@ public class BurgerController {
 	private ToggleGroup bread = new ToggleGroup();
 	private int quantity;
 
-
 	private void loadScene(String file, String title) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project4ruburger/" + file));
@@ -74,6 +70,41 @@ public class BurgerController {
 	@FXML
 	private void goToOrders(ActionEvent actionEvent) {
 		loadScene("PlacedOrder-view.fxml", "RU Burger - Orders");
+	}
+
+	private void loadComboScene(Combo combo) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project4ruburger/Combo-view.fxml"));
+			Parent root = loader.load();
+
+			ComboController controller = loader.getController();
+			controller.setCombo(combo);
+			Sandwich burger = combo.getSandwich();
+			if (burger != null) { controller.sandwichDetails.setText(burger.toString());}
+			Stage stage = (Stage) back.getScene().getWindow();
+			stage.setScene(new Scene(root, 950, 800));
+			stage.setTitle("RU Burger - Combo");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@FXML
+	private void goToCombo(ActionEvent actionEvent) {
+		boolean isDouble = doublePatty.isSelected();
+
+		Bread bread = breadSelect();
+
+		ArrayList<AddOns> addOns = addOnsSelect();
+
+		Burger burger = new Burger(bread, addOns, quantity, isDouble);
+
+		Beverage drink = new Beverage(1, Size.MEDIUM, Flavor.COLA);
+
+		Side side = Side.CHIPS;
+
+		Combo combo = new Combo(quantity, burger, drink, side);
+		loadComboScene(combo);
 	}
 
 	@FXML

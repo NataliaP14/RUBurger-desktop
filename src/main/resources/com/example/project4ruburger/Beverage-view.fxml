@@ -65,7 +65,7 @@
                 <HBox spacing="50" alignment="CENTER" >
                     <Region HBox.hgrow="ALWAYS"/>
                     <VBox spacing="10" alignment="CENTER" translateY="-20" translateX="25">
-                        <ImageView fx:id="beverageIcon" fitHeight="200" fitWidth="200" preserveRatio="true" pickOnBounds="true"/>
+                        <ImageView fx:id="beverageIcon" fitHeight="300" fitWidth="300" preserveRatio="true" pickOnBounds="true"/>
                         <Label text="Beverages">
                             <font>
                                 <Font name="System Bold" size="30.0"/>

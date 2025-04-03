@@ -108,14 +108,10 @@ public class SideController {
 	}
 
 	private void priceUpdater() {
-
 		Size size = (Size) sizeComboBox.getSelectionModel().getSelectedItem();
-
 		Side side = (Side) sideComboBox.getSelectionModel().getSelectedItem();
 
-		if (size == null || side == null) {
-			return;
-		}
+		if (size == null || side == null) { return; }
 
 		Sides sides = new Sides(quantity, side, size);
 		double total = sides.price();
@@ -135,8 +131,6 @@ public class SideController {
 		ObservableList<Size> sizes = FXCollections.observableArrayList(Size.values());
 		sizeComboBox.setItems(sizes);
 		sizeComboBox.getSelectionModel().selectFirst();
-
-
 
 		ObservableList<Side> side = FXCollections.observableArrayList(Side.values());
 		sideComboBox.setItems(side);

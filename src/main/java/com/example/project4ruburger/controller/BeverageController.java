@@ -79,7 +79,7 @@ public class BeverageController {
 
 		uploadIcons(minusIcon, "Minus.png");
 		uploadIcons(plusIcon, "Plus.png");
-		uploadIcons(beverageIcon, "Cola.png");
+		uploadIcons(beverageIcon, "Beverages.png");
 	}
 
 	private void setUpButtons() {

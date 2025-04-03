@@ -9,7 +9,7 @@ public enum Flavor {
     COLA,
     FANTA,
     SPRITE,
-    DR_PEPPER,
+    JUICE,
     PEPSI,
     LEMONADE,
     STRAWBERRY,

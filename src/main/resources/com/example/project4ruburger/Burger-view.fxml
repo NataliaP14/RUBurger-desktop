@@ -60,10 +60,8 @@
                     <Insets bottom="10.0" left="20.0" right="20.0" top="10.0"/>
                 </padding>
 
-
                 <HBox spacing="50" alignment="CENTER" >
                     <Region HBox.hgrow="ALWAYS"/>
-
 
                     <VBox spacing="10" alignment="CENTER" translateY="-20" translateX="25">
                         <ImageView fx:id="burgerIcon" fitHeight="200" fitWidth="200" preserveRatio="true" pickOnBounds="true"/>
@@ -77,7 +75,7 @@
                                 <Font name="System Bold" size="20.0"/>
                             </font>
                         </Label>
-                        <Button fx:id="combo" text="Make it a Combo" styleClass="main-button"/>
+                        <Button fx:id="combo" text="Make it a Combo" styleClass="main-button" onAction="#goToCombo"/>
                     </VBox>
 
                     <Region HBox.hgrow="ALWAYS"/>
