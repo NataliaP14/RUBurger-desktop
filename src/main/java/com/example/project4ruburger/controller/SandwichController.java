@@ -73,6 +73,42 @@ public class SandwichController {
 		loadScene("PlacedOrder-view.fxml", "RU Burger - Orders");
 	}
 
+	private void loadComboScene(Combo combo) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project4ruburger/Combo-view.fxml"));
+			Parent root = loader.load();
+
+			ComboController controller = loader.getController();
+			controller.setCombo(combo);
+			Sandwich sandwich = combo.getSandwich();
+			if (sandwich != null) { controller.sandwichDetails.setText(sandwich.toString());}
+			Stage stage = (Stage) back.getScene().getWindow();
+			stage.setScene(new Scene(root, 950, 800));
+			stage.setTitle("RU Burger - Combo");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@FXML
+	private void goToCombo(ActionEvent actionEvent) {
+		Bread bread = (Bread) breadComboBox.getSelectionModel().getSelectedItem();
+
+		Protein protein = proteinSelect();
+
+		ArrayList<AddOns> addOns = addOnsSelect();
+
+		Sandwich sandwich = new Sandwich(quantity, bread, protein, addOns);
+
+		Beverage drink = new Beverage(1, Size.MEDIUM, Flavor.COLA);
+
+		Side side = Side.CHIPS;
+
+		Combo combo = new Combo(quantity, sandwich, drink, side);
+		loadComboScene(combo);
+
+	}
+
 	@FXML
 	private void uploadIcons(ImageView view, String file) {
 		String imagePath = getClass().getResource("/image/" + file).toExternalForm();
