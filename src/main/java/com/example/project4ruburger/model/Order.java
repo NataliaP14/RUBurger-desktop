@@ -40,6 +40,14 @@ public class Order {
 	}
 
 	/**
+	 * Gets the list of items in the order.
+	 * @return	the array list containing the menu items.
+	 */
+	public ArrayList<MenuItem> getItems() {
+		return items;
+	}
+
+	/**
 	 * Finalizes the current order and starts a new one.
 	 * @return	A new order instance with the next order number.
 	 */

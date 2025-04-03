@@ -1,8 +1,6 @@
 package com.example.project4ruburger.controller;
 
-import com.example.project4ruburger.model.Size;
-import com.example.project4ruburger.model.Flavor;
-import com.example.project4ruburger.model.Beverage;
+import com.example.project4ruburger.model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -86,6 +84,8 @@ public class BeverageController {
 		sizeComboBox.setOnAction(e->priceUpdater());
 		plus.setOnAction(this::increase);
 		minus.setOnAction(this::decrease);
+
+		addToOrder.setOnAction(this::addBeverageToOrder);
 	}
 
 	private void increase(ActionEvent actionEvent) {
@@ -120,6 +120,21 @@ public class BeverageController {
 
 		price.setText(String.format("Price: $%.2f", total));
 
+	}
+
+	@FXML
+	private void addBeverageToOrder(ActionEvent event) {
+		Flavor flavor = (Flavor) flavorComboBox.getValue();
+		Size size = (Size) sizeComboBox.getValue();
+
+		Beverage beverage = new Beverage(quantity, size, flavor);
+		CurrentOrderController.getCurrentOrder().addItem(beverage);
+
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setTitle("Item Added");
+		alert.setHeaderText(null);
+		alert.setContentText("Beverage added to your order!");
+		alert.showAndWait();
 	}
 
 	@FXML

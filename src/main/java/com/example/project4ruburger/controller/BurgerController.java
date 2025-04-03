@@ -143,6 +143,8 @@ public class BurgerController {
 
 		plus.setOnAction(this::increase);
 		minus.setOnAction(this::decrease);
+
+		addToOrder.setOnAction(this::addBurgerToOrder);
 	}
 
 	private void increase(ActionEvent actionEvent) {
@@ -206,6 +208,25 @@ public class BurgerController {
 		price.setText(String.format("Price: $%.2f", total));
 
 	}
+
+
+	@FXML
+	private void addBurgerToOrder(ActionEvent event) {
+		boolean isDouble = doublePatty.isSelected();
+		Bread bread = breadSelect();
+		ArrayList<AddOns> addOns = addOnsSelect();
+
+
+		Burger burger = new Burger(bread, addOns, quantity, isDouble);		// Create the burger with all selected options
+		CurrentOrderController.getCurrentOrder().addItem(burger);		// to add  burger to the current order using the static method
+
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setTitle("Item Added");
+		alert.setHeaderText(null);
+		alert.setContentText("Burger added to your order!");
+		alert.showAndWait();
+	}
+
 
 
 	@FXML
