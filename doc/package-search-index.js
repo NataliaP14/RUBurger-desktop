@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"com.example.project4ruburger","l":"com.example.project4ruburger.controller"},{"m":"com.example.project4ruburger","l":"com.example.project4ruburger.model"}];updateSearchResults();

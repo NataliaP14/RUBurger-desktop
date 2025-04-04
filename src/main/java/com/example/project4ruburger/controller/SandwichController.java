@@ -1,6 +1,14 @@
 package com.example.project4ruburger.controller;
 
-import com.example.project4ruburger.model.*;
+import com.example.project4ruburger.model.Bread;
+import com.example.project4ruburger.model.Protein;
+import com.example.project4ruburger.model.Beverage;
+import com.example.project4ruburger.model.Side;
+import com.example.project4ruburger.model.Sandwich;
+import com.example.project4ruburger.model.Combo;
+import com.example.project4ruburger.model.AddOns;
+import com.example.project4ruburger.model.Size;
+import com.example.project4ruburger.model.Flavor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,37 +26,41 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
+ * The sandwich controller handles all the actions of the sandwich page, which creates the sandwich
+ * based off the user customization, users additionally have the option to change it to a combo
  * @author Natalia Peguero, Olivia Kamau
  */
 public class SandwichController {
-	public Button cart;
-	public Button orders;
-	public ImageView sandwichIcon;
-	public Button combo;
-	public RadioButton roastBeef;
-	public RadioButton salmon;
-	public RadioButton chicken;
-	public ComboBox breadComboBox;
-	public CheckBox lettuce;
-	public CheckBox tomato;
-	public CheckBox onion;
-	public CheckBox avocado;
-	public CheckBox cheese;
-	public Button minus;
-	public ImageView minusIcon;
-	public Label number;
-	public Button plus;
-	public ImageView plusIcon;
-	public Label price;
-	public Button addToOrder;
-	public VBox mainBackground;
-	public ImageView backIcon;
+	@FXML private ImageView sandwichIcon;
+	@FXML private RadioButton roastBeef;
+	@FXML private RadioButton salmon;
+	@FXML private RadioButton chicken;
+	@FXML private ComboBox breadComboBox;
+	@FXML private CheckBox lettuce;
+	@FXML private CheckBox tomato;
+	@FXML private CheckBox onion;
+	@FXML private CheckBox avocado;
+	@FXML private CheckBox cheese;
+	@FXML private Button minus;
+	@FXML private ImageView minusIcon;
+	@FXML private Label number;
+	@FXML private Button plus;
+	@FXML private ImageView plusIcon;
+	@FXML private Label price;
+	@FXML private Button addToOrder;
+	@FXML private VBox mainBackground;
+	@FXML private ImageView backIcon;
 	@FXML private Button back;
+
 
 	ToggleGroup protein = new ToggleGroup();
 	private int quantity;
 
-
+	/**
+	 * Loads to a new scene
+	 * @param file the view to load
+	 * @param title the title to set the view to
+	 */
 	private void loadScene(String file, String title) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project4ruburger/" + file));
@@ -61,21 +73,37 @@ public class SandwichController {
 		}
 	}
 
+	/**
+	 * switches back to the main menu
+	 * @param actionEvent event handler
+	 */
 	@FXML
 	private void backToMainMenu(ActionEvent actionEvent) {
 		loadScene("Main-view.fxml", "RU Burger - Main Menu");
 	}
 
+	/**
+	 * switches to the current order view
+	 * @param actionEvent event handler
+	 */
 	@FXML
 	private void goToCart(ActionEvent actionEvent) {
 		loadScene("CurrentOrder-view.fxml", "RU Burger - Cart");
 	}
 
+	/**
+	 * Switches to the placed order view
+	 * @param actionEvent event handler
+	 */
 	@FXML
 	private void goToOrders(ActionEvent actionEvent) {
 		loadScene("PlacedOrder-view.fxml", "RU Burger - Orders");
 	}
 
+	/**
+	 * Loads to the combo view
+	 * @param combo the combo to load
+	 */
 	private void loadComboScene(Combo combo) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project4ruburger/Combo-view.fxml"));
@@ -93,6 +121,10 @@ public class SandwichController {
 		}
 	}
 
+	/**
+	 * Switches to the combo page, by creating a new combo object and calling the load combo scene
+	 * @param actionEvent event handler
+	 */
 	@FXML
 	private void goToCombo(ActionEvent actionEvent) {
 		Bread bread = (Bread) breadComboBox.getSelectionModel().getSelectedItem();
@@ -112,12 +144,20 @@ public class SandwichController {
 
 	}
 
+	/**
+	 * Uploads the icons to the view
+	 * @param view the view to upload to
+	 * @param file the file of the icon
+	 */
 	@FXML
 	private void uploadIcons(ImageView view, String file) {
 		String imagePath = getClass().getResource("/image/" + file).toExternalForm();
 		view.setImage(new Image(imagePath));
 	}
 
+	/**
+	 * Sets up the icons and changes the style of the minus and plus button
+	 */
 	private void setUpIcons() {
 		minus.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
 		plus.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
@@ -128,6 +168,9 @@ public class SandwichController {
 		uploadIcons(backIcon, "Left.png");
 	}
 
+	/**
+	 * Sets up the toggles
+	 */
 	private void setUpToggle() {
 		roastBeef.setToggleGroup(protein);
 		salmon.setToggleGroup(protein);
@@ -135,6 +178,9 @@ public class SandwichController {
 
 	}
 
+	/**
+	 * Sets up all the buttons from the view
+	 */
 	private void setUpButtons() {
 		roastBeef.setOnAction(e ->priceUpdater());
 		salmon.setOnAction(e ->priceUpdater());
@@ -167,11 +213,19 @@ public class SandwichController {
 
 	}
 
+	/**
+	 * Increase the quantity
+	 * @param actionEvent event handler
+	 */
 	private void increase(ActionEvent actionEvent) {
 		quantity++;
 		updateQuantity();
 	}
 
+	/**
+	 * Decrease the quantity
+	 * @param actionEvent event handler
+	 */
 	private void decrease(ActionEvent actionEvent) {
 		if (quantity > 1) {
 			quantity--;
@@ -179,11 +233,18 @@ public class SandwichController {
 		updateQuantity();
 	}
 
+	/**
+	 * Dynamically updates the quantity
+	 */
 	private void updateQuantity() {
 		number.setText(String.valueOf(quantity));
 		priceUpdater();
 	}
 
+	/**
+	 * Adds the addons to the arraylist based off user selection
+	 * @return the addons
+	 */
 	private ArrayList<AddOns> addOnsSelect() {
 		ArrayList<AddOns> addOns = new ArrayList<>();
 
@@ -206,6 +267,10 @@ public class SandwichController {
 		return addOns;
 	}
 
+	/**
+	 * Gets the protein from the enum class based off user selection
+	 * @return the protein
+	 */
 	private Protein proteinSelect() {
 		Protein protein = null;
 		if (roastBeef.isSelected()) {
@@ -218,7 +283,9 @@ public class SandwichController {
 		return protein;
 	}
 
-
+	/**
+	 * Updates the price by creating a new object to dynamically change it
+	 */
 	private void priceUpdater() {
 
 		Bread bread = (Bread) breadComboBox.getSelectionModel().getSelectedItem();
@@ -235,6 +302,11 @@ public class SandwichController {
 
 	}
 
+	/**
+	 * Changes the bread to Capital case
+	 * @param bread the bread select
+	 * @return returns the bread
+	 */
 	private String changeBread(Bread bread) {
 		return switch (bread) {
 			case BRIOCHE -> "Brioche";
@@ -245,6 +317,10 @@ public class SandwichController {
 		};
 	}
 
+	/**
+	 * Adds the sandwich to the order
+	 * @param event event handler
+	 */
 	@FXML
 	private void addSandwichToOrder(ActionEvent event) {
 		Protein protein = proteinSelect();
@@ -262,7 +338,9 @@ public class SandwichController {
 		alert.showAndWait();
 	}
 
-
+	/**
+	 * Initializes the the data and functions from the controller when the program runs
+	 */
 	@FXML
 	public void initialize() {
 		setUpIcons();

@@ -1,6 +1,7 @@
 package com.example.project4ruburger.model;
 
 /**
+ * This enum class represents the side options of the application
  * @author Natalia Peguero, Olivia Kamau
  */
 public enum Side {

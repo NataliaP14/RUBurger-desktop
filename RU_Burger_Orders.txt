@@ -1,0 +1,21 @@
+RU Burger Orders: 
+-------------------
+Order #1
+	Items:
+	- Combo [1] Burger, double [BRIOCHE] [None] [9.49] [1] [COLA, CHIPS, MEDIUM] [11.49]
+	- Sandwich [BRIOCHE ROAST_BEEF] [None] [10.99] [1]
+
+	Subtotal: $22.48
+	Sales Tax: $1.49
+	Total: $23.97
+
+
+Order #2
+	Items:
+	- Sandwich [BRIOCHE CHICKEN] [AVOCADO] [9.49] [1]
+
+	Subtotal: $9.49
+	Sales Tax: $0.63
+	Total: $10.12
+
+

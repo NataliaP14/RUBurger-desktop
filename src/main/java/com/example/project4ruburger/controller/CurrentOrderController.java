@@ -15,7 +15,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -30,13 +29,12 @@ import java.io.IOException;
  * @author Natalia Peguero, Olivia Kamau
  */
 public class CurrentOrderController {
-	public Button cart;
-	public Button orders;
-	public ImageView backIcon;
-	public VBox mainBackground;
+	@FXML private ImageView backIcon;
+	@FXML private VBox mainBackground;
 	@FXML private Button back;
-	@FXML private Button removeOrderItem, placeOrder;
-	@FXML private Label subtotal, salesTax, totalAmount;
+	@FXML private Label subtotal;
+	@FXML private Label salesTax;
+	@FXML private Label totalAmount;
 	@FXML private ListView<MenuItem> orderItemsListView;
 
 	private static Order currentOrder = null;
@@ -60,7 +58,6 @@ public class CurrentOrderController {
 	public static void setCurrentOrder(Order order) {
 		currentOrder = order;
 	}
-
 
 
 	/**
@@ -111,16 +108,21 @@ public class CurrentOrderController {
 		loadScene("PlacedOrder-view.fxml", "RU Burger - Orders");
 	}
 
-
-
+	/**
+	 * Uploads the icon of the corresponding icon variable
+	 * @param view the view to upload the icon to
+	 * @param file the file of the icon
+	 */
 	@FXML
 	private void uploadIcons(ImageView view, String file) {
 		String imagePath = getClass().getResource("/image/" + file).toExternalForm();
 		view.setImage(new Image(imagePath));
 	}
 
+	/**
+	 * Sets up the icons
+	 */
 	private void setUpIcons() {
-
 		uploadIcons(backIcon, "Left.png");
 
 	}
@@ -153,9 +155,6 @@ public class CurrentOrderController {
 		totalAmount.setStyle("-fx-text-fill:white; -fx-font-family: 'Impact'; -fx-font-size: 16px;");
 
 	}
-	
-
-
 
 	/**
 	 * Removes the selected item from the order
@@ -192,7 +191,6 @@ public class CurrentOrderController {
 	}
 
 
-
 	/**
 	 * Initializes the controller
 	 */
@@ -210,7 +208,5 @@ public class CurrentOrderController {
 				"-fx-background-position: center;");
 
 	}
-
-
 
 }

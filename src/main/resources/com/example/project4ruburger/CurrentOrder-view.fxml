@@ -4,17 +4,10 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.ImageView?>
@@ -34,8 +27,8 @@
 
             <Region HBox.hgrow="ALWAYS" />
 
-            <Button fx:id = "cart" text="Cart" onAction="#goToCart" styleClass="nav-button"/>
-            <Button fx:id = "orders" text="My Orders" onAction="#goToOrders" styleClass="nav-button" />
+            <Button text="Cart" onAction="#goToCart" styleClass="nav-button"/>
+            <Button text="My Orders" onAction="#goToOrders" styleClass="nav-button" />
         </HBox>
     </top>
 
@@ -66,8 +59,8 @@
             <ListView fx:id="orderItemsListView" editable="false" prefHeight="500.0" prefWidth="600.0"/>
 
             <HBox spacing="10" alignment="CENTER">
-                <Button fx:id="removeOrderItem" text="Remove Order Item" onAction="#removeOrderItem" styleClass="main-button"/>
-                <Button fx:id="placeOrder" text="Place Order" onAction="#placeOrder" styleClass="main-button"/>
+                <Button text="Remove Order Item" onAction="#removeOrderItem" styleClass="main-button"/>
+                <Button text="Place Order" onAction="#placeOrder" styleClass="main-button"/>
             </HBox>
         </VBox>
 

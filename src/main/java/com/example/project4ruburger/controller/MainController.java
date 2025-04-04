@@ -6,11 +6,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -21,25 +18,25 @@ import javafx.util.Duration;
 import java.io.IOException;
 
 /**
+ * This is the main controller which sets up the main menu view
  * @author Natalia Peguero, Olivia Kamau
  */
 public class MainController {
 
-	public ImageView sandwichIcon;
-	public Rectangle sandwichRectangle;
-	public ImageView sideIcon;
-	public ImageView beverageIcon;
-	public ImageView burgerIcon;
-	public VBox mainBackground;
-
-	@FXML private Button cart;
-	@FXML private Button orders;
+	@FXML private ImageView sandwichIcon;
+	@FXML private ImageView sideIcon;
+	@FXML private ImageView beverageIcon;
+	@FXML private ImageView burgerIcon;
+	@FXML private VBox mainBackground;
 	@FXML private StackPane burgerBox;
 	@FXML private StackPane sandwichBox;
 	@FXML private StackPane beverageBox;
 	@FXML private StackPane sideBox;
 
-
+	/**
+	 * Increases the scale of the rectangle when a user hovers over it
+	 * @param stackPane the StackPane to get the rectangle form
+	 */
 	private void hover(StackPane stackPane) {
 		Rectangle rectangle = (Rectangle) stackPane.getChildren().get(0);
 		ScaleTransition in = new ScaleTransition(Duration.millis(300), stackPane);
@@ -60,6 +57,11 @@ public class MainController {
 		});
 	}
 
+	/**
+	 * Loads a new scene in the current stage
+	 * @param file	the FXML file name
+	 * @param title	the title of the scene window
+	 */
 	private void loadScene(String file, String title) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project4ruburger/" + file));
@@ -72,29 +74,51 @@ public class MainController {
 		}
 	}
 
+	/**
+	 * Changes the scene based off the stackpane
+	 * @param stackPane The stackpane clicked
+	 * @param file the file it changes to
+	 * @param title the title of the view that was switched to
+	 */
 	private void changeScene(StackPane stackPane, String file, String title) {
 		hover(stackPane);
 		stackPane.setOnMouseClicked(e -> {
-			//changeColor(stackPane);
 			loadScene(file, title);
 		});
 	}
 
+	/**
+	 * Switches to the cart view
+	 * @param actionEvent event handler
+	 */
 	@FXML
-	public void goToCart(ActionEvent actionEvent) {
+	private void goToCart(ActionEvent actionEvent) {
 		loadScene("CurrentOrder-view.fxml", "RU Burger - Cart");
 	}
 
+	/**
+	 * Switches to the PlacedOrder view
+	 * @param actionEvent event handler
+	 */
 	@FXML
-	public void goToOrders(ActionEvent actionEvent) {
+	private void goToOrders(ActionEvent actionEvent) {
 		loadScene("PlacedOrder-view.fxml", "RU Burger - Orders");
 	}
+
+	/**
+	 * Uploads the icons to the view
+	 * @param view the view to upload to
+	 * @param file the file of the icon
+	 */
 	@FXML
 	private void uploadIcons(ImageView view, String file) {
 		String imagePath = getClass().getResource("/image/" + file).toExternalForm();
 		view.setImage(new Image(imagePath));
 	}
 
+	/**
+	 * Sets up the icons
+	 */
 	private void setUpIcons() {
 		uploadIcons(sandwichIcon, "Sandwich.png");
 		uploadIcons(burgerIcon, "Burger.png");
@@ -103,6 +127,9 @@ public class MainController {
 
 	}
 
+	/**
+	 * Initializes the controller
+	 */
 	public void initialize() {
 		changeScene(burgerBox, "Burger-view.fxml", "RU Burger - Ordering Burgers ");
 		changeScene(sandwichBox, "Sandwich-view.fxml", "RU Burger - Ordering Sandwiches");

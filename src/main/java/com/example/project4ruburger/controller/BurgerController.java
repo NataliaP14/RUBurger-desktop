@@ -1,6 +1,14 @@
 package com.example.project4ruburger.controller;
 
-import com.example.project4ruburger.model.*;
+import com.example.project4ruburger.model.Bread;
+import com.example.project4ruburger.model.Burger;
+import com.example.project4ruburger.model.Beverage;
+import com.example.project4ruburger.model.Side;
+import com.example.project4ruburger.model.Sandwich;
+import com.example.project4ruburger.model.Combo;
+import com.example.project4ruburger.model.AddOns;
+import com.example.project4ruburger.model.Size;
+import com.example.project4ruburger.model.Flavor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,23 +26,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
+ * The burger controller handles all the actions of the burger page, which creates the burger
+ * based off the user customization, users additionally have the option to change it to a combo
  * @author Natalia Peguero, Olivia Kamau
  */
 public class BurgerController {
-	public Button cart;
-	public Button orders;
-	public CheckBox lettuce;
-	public CheckBox tomato;
-	public CheckBox onion;
-	public CheckBox avocado;
-	public CheckBox cheese;
-	public VBox mainBackground;
-	public ImageView backIcon;
-	@FXML private RadioButton singlePatty, doublePatty;
-	@FXML private RadioButton briocheBread, wheatBread, pretzelBread;
-	@FXML private Rectangle rectangle;
-	@FXML ImageView burgerIcon;
-	@FXML private Button combo;
+	@FXML private CheckBox lettuce;
+	@FXML private CheckBox tomato;
+	@FXML private CheckBox onion;
+	@FXML private CheckBox avocado;
+	@FXML private CheckBox cheese;
+	@FXML private VBox mainBackground;
+	@FXML private ImageView backIcon;
+	@FXML private RadioButton singlePatty;
+	@FXML private RadioButton doublePatty;
+	@FXML private RadioButton briocheBread;
+	@FXML private RadioButton wheatBread;
+	@FXML private RadioButton pretzelBread;
+	@FXML private ImageView burgerIcon;
 	@FXML private Button addToOrder;
 	@FXML private Label price;
 	@FXML private Label number;
@@ -48,6 +57,11 @@ public class BurgerController {
 	private ToggleGroup bread = new ToggleGroup();
 	private int quantity;
 
+	/**
+	 * Loads a new scene based on the corresponding view
+	 * @param file the view file to switch to
+	 * @param title the title name to set based on the view
+	 */
 	private void loadScene(String file, String title) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project4ruburger/" + file));
@@ -60,21 +74,37 @@ public class BurgerController {
 		}
 	}
 
+	/**
+	 * Switches back to main menu
+	 * @param actionEvent event handler
+	 */
 	@FXML
 	private void backToMainMenu(ActionEvent actionEvent) {
 		loadScene("Main-view.fxml", "RU Burger - Main Menu");
 	}
 
+	/**
+	 * Switches to the currentOrder view
+	 * @param actionEvent event handler
+	 */
 	@FXML
 	private void goToCart(ActionEvent actionEvent) {
 		loadScene("CurrentOrder-view.fxml", "RU Burger - Cart");
 	}
 
+	/**
+	 * Switches to the PlacedOrder view
+	 * @param actionEvent event handler
+	 */
 	@FXML
 	private void goToOrders(ActionEvent actionEvent) {
 		loadScene("PlacedOrder-view.fxml", "RU Burger - Orders");
 	}
 
+	/**
+	 * Loads the new scene and switches to the combo view
+	 * @param combo the combo that was created to switch to the view
+	 */
 	private void loadComboScene(Combo combo) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project4ruburger/Combo-view.fxml"));
@@ -92,6 +122,10 @@ public class BurgerController {
 		}
 	}
 
+	/**
+	 * Creates a new combo object and calls the method to load into the combo view
+	 * @param actionEvent event handler
+	 */
 	@FXML
 	private void goToCombo(ActionEvent actionEvent) {
 		boolean isDouble = doublePatty.isSelected();
@@ -110,12 +144,20 @@ public class BurgerController {
 		loadComboScene(combo);
 	}
 
+	/**
+	 * Uploads the icons to the view
+	 * @param view the view to upload to
+	 * @param file the file of the icon
+	 */
 	@FXML
 	private void uploadIcons(ImageView view, String file) {
 		String imagePath = getClass().getResource("/image/" + file).toExternalForm();
 		view.setImage(new Image(imagePath));
 	}
 
+	/**
+	 * Sets up the icons in the xml file
+	 */
 	private void setUpIcons() {
 		minus.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
 		plus.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
@@ -126,6 +168,9 @@ public class BurgerController {
 		uploadIcons(backIcon, "Left.png");
 	}
 
+	/**
+	 * Sets up the toggles from the xml file
+	 */
 	private void setUpToggle() {
 		singlePatty.setToggleGroup(patty);
 		doublePatty.setToggleGroup(patty);
@@ -135,6 +180,9 @@ public class BurgerController {
 		pretzelBread.setToggleGroup(bread);
 	}
 
+	/**
+	 * Sets up the events for all the buttons
+	 */
 	private void setUpButtons() {
 		singlePatty.setOnAction(e -> priceUpdater());
 		doublePatty.setOnAction(e -> priceUpdater());
@@ -151,11 +199,19 @@ public class BurgerController {
 		addToOrder.setOnAction(this::addBurgerToOrder);
 	}
 
+	/**
+	 * Increases the quantity of the item
+	 * @param actionEvent event handler
+	 */
 	private void increase(ActionEvent actionEvent) {
 		quantity++;
 		updateQuantity();
 	}
 
+	/**
+	 * Decreases the quantity of the item
+	 * @param actionEvent event handler
+	 */
 	private void decrease(ActionEvent actionEvent) {
 		if (quantity > 1) {
 			quantity--;
@@ -163,11 +219,18 @@ public class BurgerController {
 		updateQuantity();
 	}
 
+	/**
+	 * Dynamically updates the quantity of item
+	 */
 	private void updateQuantity() {
 		number.setText(String.valueOf(quantity));
 		priceUpdater();
 	}
 
+	/**
+	 * Adds the corresponding bread type based off the user selection
+	 * @return returns the bread selected
+	 */
 	private Bread breadSelect() {
 		Bread bread = null;
 		if (briocheBread.isSelected()) {
@@ -180,6 +243,10 @@ public class BurgerController {
 		return bread;
 	}
 
+	/**
+	 * Adds the user addOns to the array lst
+	 * @return returns the addOns
+	 */
 	private ArrayList<AddOns> addOnsSelect() {
 		ArrayList<AddOns> addOns = new ArrayList<>();
 
@@ -198,7 +265,9 @@ public class BurgerController {
 		return addOns;
 	}
 
-
+	/**
+	 * Dynamically updates the price of the item
+	 */
 	private void priceUpdater() {
 
 		boolean isDouble = doublePatty.isSelected();
@@ -214,7 +283,10 @@ public class BurgerController {
 
 	}
 
-
+	/**
+	 * Adds the burger to the order in current order
+	 * @param event action event handler
+	 */
 	@FXML
 	private void addBurgerToOrder(ActionEvent event) {
 		boolean isDouble = doublePatty.isSelected();
@@ -222,8 +294,8 @@ public class BurgerController {
 		ArrayList<AddOns> addOns = addOnsSelect();
 
 
-		Burger burger = new Burger(bread, addOns, quantity, isDouble);		// Create the burger with all selected options
-		CurrentOrderController.getCurrentOrder().addItem(burger);		// to add  burger to the current order using the static method
+		Burger burger = new Burger(bread, addOns, quantity, isDouble);
+		CurrentOrderController.getCurrentOrder().addItem(burger);
 
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setTitle("Item Added");
@@ -233,7 +305,9 @@ public class BurgerController {
 	}
 
 
-
+	/**
+	 * initializes the data below when the program runs
+	 */
 	@FXML
 	public void initialize() {
 		setUpIcons();

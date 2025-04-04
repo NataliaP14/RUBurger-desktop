@@ -1,8 +1,6 @@
 package com.example.project4ruburger.model;
 
 import java.util.ArrayList;
-import java.io.FileWriter;
-import java.io.IOException;
 
 
 /**
@@ -110,45 +108,5 @@ public class Order {
 	public double getTotalAmount() {
 		return subPrice + getSalesTax();
 	}
-
-	/**
-	 * Displays the order details for each order number.
-	 * @return	A formatted string with the order details.
-	 */
-	public String displayOrderDetails() {
-		StringBuilder orderDetails = new StringBuilder();
-
-		for(MenuItem item : items) {
-			orderDetails.append(item.toString()).append("\n");
-		}
-
-		return orderDetails.toString();
-	}
-
-	/**
-	 * Exports the order details to a text file (using FileChooser)
-	 * @param filename	The name of the file being written to.
-	 */
-	public void exportOrder(String filename) {
-
-		try(FileWriter writer = new FileWriter(filename)){
-
-			writer.write("Order #" + number + "\n");
-			for(MenuItem item : items) {
-				writer.write(item.toString() + "\n");
-			}
-			writer.write("Subtotal: $" + String.format("%.2f", getSubTotal()) + "\n");
-			writer.write("Sales Tax: $" + String.format("%.2f", getSalesTax()) + "\n");
-			writer.write("Total: $" + String.format("%.2f", getTotalAmount()) + "\n\n");
-
-		} catch(IOException e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	/* VERY IMPORTANT NOTE PLS DON'T FORGET PLS: FileWriter is for the model, FileChooser is
-		for the controller, so don't use FileChooser here (use it in controller).
-	 */
 
 }
