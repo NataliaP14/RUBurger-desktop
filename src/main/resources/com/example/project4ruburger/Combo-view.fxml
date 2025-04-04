@@ -43,19 +43,18 @@
     <center>
         <StackPane>
             <VBox fx:id="mainBackground" prefHeight="700" prefWidth="900" style="-fx-background-color: #f4f4f4;">
-                <children>
-                    <Button fx:id="back" onAction="#backToMainMenu" styleClass="main-button" text="Main Menu"
-                            translateX="15" translateY="20">
-                        <graphic>
-                            <ImageView fx:id="backIcon" fitHeight="20" fitWidth="20" preserveRatio="true"
-                                       pickOnBounds="true" />
-                        </graphic>
-                    </Button>
-                </children></VBox>
+                <Button fx:id="back" onAction="#backToMainMenu" styleClass="main-button" text="Main Menu"
+                        translateX="15" translateY="20">
+                    <graphic>
+                        <ImageView fx:id="backIcon" fitHeight="20" fitWidth="20" preserveRatio="true"
+                                   pickOnBounds="true"/>
+                    </graphic>
+                </Button>
+            </VBox>
 
             <Rectangle fx:id="rectangle" arcHeight="60" arcWidth="40" fill="white" height="400" width="800">
                 <effect>
-                    <DropShadow color="rgba(0,0,0,0.4)" offsetX="5" offsetY="5" radius="5" />
+                    <DropShadow color="rgba(255,255,255,0.4)" offsetX="5" offsetY="5" radius="5" />
                 </effect>
             </Rectangle>
 
@@ -103,7 +102,7 @@
                                         <Font name="Impact" size="20.0"/>
                                     </font>
                                 </Label>
-                                <ComboBox fx:id="sideComboBox" prefWidth="150.0" promptText="Flavors"/>
+                                <ComboBox styleClass="dropdown" fx:id="sidesComboBox" prefWidth="150.0" promptText="Flavors"/>
                             </VBox>
                             <ImageView fx:id="sideIcon" fitHeight="80" fitWidth="80" preserveRatio="true" pickOnBounds="true"/>
                         </HBox>
@@ -115,7 +114,7 @@
                                         <Font name="Impact" size="20.0"/>
                                     </font>
                                 </Label>
-                                <ComboBox fx:id="drinkComboBox" prefWidth="150.0"/>
+                                <ComboBox styleClass="dropdown" fx:id="drinkComboBox" prefWidth="150.0"/>
                             </VBox>
                             <ImageView fx:id="drinkIcon" fitHeight="100" fitWidth="100" preserveRatio="true" pickOnBounds="true"/>
                         </HBox>

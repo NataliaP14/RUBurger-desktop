@@ -12,8 +12,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -27,6 +29,7 @@ public class CurrentOrderController {
 	public Button cart;
 	public Button orders;
 	public ImageView backIcon;
+	public VBox mainBackground;
 	@FXML private Button back;
 	@FXML private Button removeOrderItem, placedOrder;
 	@FXML private Label subtotal, salesTax, totalAmount;
@@ -46,14 +49,6 @@ public class CurrentOrderController {
 		currentOrder = order;
 	}
 
-
-	@FXML
-	public void initialize() {
-		if (currentOrder == null) {
-			currentOrder = new Order(1);
-		}
-		updateOrderDisplay();
-	}
 
 	private void loadScene(String file, String title) {
 		try {
@@ -86,6 +81,40 @@ public class CurrentOrderController {
 		loadScene("PlacedOrder-view.fxml", "RU Burger - Orders");
 	}
 
+	@FXML
+	private void uploadIcons(ImageView view, String file) {
+		String imagePath = getClass().getResource("/image/" + file).toExternalForm();
+		view.setImage(new Image(imagePath));
+	}
+
+	private void setUpIcons() {
+
+		uploadIcons(backIcon, "Left.png");
+
+	}
+
+	private void updateOrderDisplay() {
+		if(currentOrder != null) {
+			ObservableList<MenuItem> itemsList = FXCollections.observableArrayList(currentOrder.getItems());
+			orderItemsListView.setItems(itemsList);
+
+			subtotal.setText(String.format("Subtotal: $%.2f", currentOrder.getSubTotal()));
+			salesTax.setText(String.format("Sales Tax: $%.2f", currentOrder.getSalesTax()));
+			totalAmount.setText(String.format("Total: $%.2f", currentOrder.getTotalAmount()));
+		} else {
+			subtotal.setText("Subtotal: $0.00");
+			salesTax.setText("Sales Tax: $0.00");
+			totalAmount.setText("Total: $0.00");
+
+
+		}
+
+		subtotal.setStyle("-fx-text-fill:white; -fx-font-family: 'Impact'; -fx-font-size: 16px;");
+		salesTax.setStyle("-fx-text-fill:white; -fx-font-family: 'Impact'; -fx-font-size: 16px;");
+		totalAmount.setStyle("-fx-text-fill:white; -fx-font-family: 'Impact'; -fx-font-size: 16px;");
+
+
+	}
 	/*public void selectOrder(MouseEvent mouseEvent) {
 	} */
 
@@ -108,22 +137,21 @@ public class CurrentOrderController {
 		updateOrderDisplay();
 	}
 
-	private void updateOrderDisplay() {
-		if(currentOrder != null) {
-			ObservableList<MenuItem> itemsList = FXCollections.observableArrayList(currentOrder.getItems());
-			orderItemsListView.setItems(itemsList);
-
-			subtotal.setText(String.format("Subtotal: $%.2f", currentOrder.getSubTotal()));
-			salesTax.setText(String.format("Sales Tax: $%.2f", currentOrder.getSalesTax()));
-			totalAmount.setText(String.format("Total: $%.2f", currentOrder.getTotalAmount()));
-		} else {
-			orderItemsListView.setItems(FXCollections.observableArrayList());
-			subtotal.setText("Subtotal: $0.00");
-			salesTax.setText("Sales Tax: $0.00");
-			totalAmount.setText("Total: $0.00");
+	@FXML
+	public void initialize() {
+		setUpIcons();
+		if (currentOrder == null) {
+			currentOrder = new Order(1);
 		}
+		updateOrderDisplay();
 
+		String imagePath = getClass().getResource("/image/brownBackground.jpg").toExternalForm();
+		mainBackground.setStyle("-fx-background-image: url('" + imagePath + "'); " +
+				"-fx-background-size: cover; " +
+				"-fx-background-position: center;");
 	}
+
+
 
 
 

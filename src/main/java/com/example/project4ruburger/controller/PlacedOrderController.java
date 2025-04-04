@@ -6,8 +6,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,6 +23,8 @@ public class PlacedOrderController {
 	public Button cart;
 	public Button orders;
 	public ImageView backIcon;
+	public ComboBox orderDropdownComboBox;
+	public VBox mainBackground;
 	@FXML
 	private Button back;
 
@@ -48,5 +54,44 @@ public class PlacedOrderController {
 	@FXML
 	private void goToOrders(ActionEvent actionEvent) {
 		loadScene("PlacedOrder-view.fxml", "RU Burger - Orders");
+	}
+
+	private void setUpButtons() {
+		orderDropdownComboBox.setOnMouseEntered(e -> {
+			ListCell<?> buttonCell = orderDropdownComboBox.getButtonCell();
+			if (buttonCell != null) {
+				buttonCell.setStyle("-fx-text-fill: white; -fx-background-color: #6e0512;");
+			}
+		});
+
+		orderDropdownComboBox.setOnMouseExited(e -> {
+			ListCell<?> buttonCell = orderDropdownComboBox.getButtonCell();
+			if (buttonCell != null) {
+				buttonCell.setStyle("-fx-text-fill: black; -fx-background-color: transparent;");
+			}
+		});
+
+	}
+
+	@FXML
+	private void uploadIcons(ImageView view, String file) {
+		String imagePath = getClass().getResource("/image/" + file).toExternalForm();
+		view.setImage(new Image(imagePath));
+	}
+
+	private void setUpIcons() {
+		uploadIcons(backIcon, "Left.png");
+
+	}
+
+	@FXML
+	public void initialize() {
+		setUpIcons();
+		setUpButtons();
+
+		String imagePath = getClass().getResource("/image/brownBackground.jpg").toExternalForm();
+		mainBackground.setStyle("-fx-background-image: url('" + imagePath + "'); " +
+				"-fx-background-size: cover; " +
+				"-fx-background-position: center;");
 	}
 }

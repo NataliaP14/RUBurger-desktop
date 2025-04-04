@@ -42,15 +42,14 @@
     <center>
         <StackPane>
             <VBox fx:id="mainBackground" prefHeight="700" prefWidth="900" style="-fx-background-color: #f4f4f4;">
-                <children>
-                    <Button fx:id="back" onAction="#backToMainMenu" styleClass="main-button" text="Main Menu"
-                            translateX="15" translateY="20">
-                        <graphic>
-                            <ImageView fx:id="backIcon" fitHeight="20" fitWidth="20" preserveRatio="true"
-                                       pickOnBounds="true" />
-                        </graphic>
-                    </Button>
-                </children></VBox>
+                <Button fx:id="back" onAction="#backToMainMenu" styleClass="main-button" text="Main Menu"
+                        translateX="15" translateY="20">
+                    <graphic>
+                        <ImageView fx:id="backIcon" fitHeight="20" fitWidth="20" preserveRatio="true"
+                                   pickOnBounds="true"/>
+                    </graphic>
+                </Button>
+            </VBox>
 
             <Rectangle fx:id="rectangle" arcHeight="30" arcWidth="30" fill="white" height="400" width="800">
                 <effect>

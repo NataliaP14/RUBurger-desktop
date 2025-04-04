@@ -8,10 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -25,7 +22,7 @@ import java.io.IOException;
 public class ComboController {
 	public Button cart;
 	public Button orders;
-	public ComboBox sideComboBox;
+	public ComboBox sidesComboBox;
 	public ImageView sideIcon;
 	public ComboBox drinkComboBox;
 	public ImageView drinkIcon;
@@ -102,7 +99,7 @@ public class ComboController {
 
 	private void changeIcons() {
 		Flavor flavor = (Flavor) drinkComboBox.getSelectionModel().getSelectedItem();
-		Side side = (Side) sideComboBox.getSelectionModel().getSelectedItem();
+		Side side = (Side) sidesComboBox.getSelectionModel().getSelectedItem();
 
 		switch(flavor) {
 			case COLA: uploadIcons(drinkIcon, "Cola.png"); break;
@@ -123,7 +120,7 @@ public class ComboController {
 			changeIcons();
 		});
 
-		sideComboBox.setOnAction(e->{
+		sidesComboBox.setOnAction(e->{
 			priceUpdater();
 			changeIcons();
 		});
@@ -131,6 +128,34 @@ public class ComboController {
 		minus.setOnAction(this::decrease);
 
 		addToOrder.setOnAction(this::addComboToOrder);
+
+		drinkComboBox.setOnMouseEntered(e -> {
+			ListCell<?> buttonCell = drinkComboBox.getButtonCell();
+			if (buttonCell != null) {
+				buttonCell.setStyle("-fx-text-fill: white; -fx-background-color: #6e0512;");
+			}
+		});
+
+		drinkComboBox.setOnMouseExited(e -> {
+			ListCell<?> buttonCell = drinkComboBox.getButtonCell();
+			if (buttonCell != null) {
+				buttonCell.setStyle("-fx-text-fill: black; -fx-background-color: transparent;");
+			}
+		});
+
+		sidesComboBox.setOnMouseEntered(e -> {
+			ListCell<?> buttonCell = sidesComboBox.getButtonCell();
+			if (buttonCell != null) {
+				buttonCell.setStyle("-fx-text-fill: white; -fx-background-color: #6e0512;");
+			}
+		});
+
+		sidesComboBox.setOnMouseExited(e -> {
+			ListCell<?> buttonCell = sidesComboBox.getButtonCell();
+			if (buttonCell != null) {
+				buttonCell.setStyle("-fx-text-fill: black; -fx-background-color: transparent;");
+			}
+		});
 	}
 
 	private void increase(ActionEvent actionEvent) {
@@ -152,7 +177,7 @@ public class ComboController {
 
 	private void priceUpdater() {
 		Flavor flavor = (Flavor) drinkComboBox.getSelectionModel().getSelectedItem();
-		Side side = (Side) sideComboBox.getSelectionModel().getSelectedItem();
+		Side side = (Side) sidesComboBox.getSelectionModel().getSelectedItem();
 
 		if (flavor == null || side == null || this.combo == null || this.combo.getSandwich() == null) { return; }
 
@@ -169,7 +194,7 @@ public class ComboController {
 	@FXML
 	private void addComboToOrder(ActionEvent event) {
 		Sandwich sandwich = combo.getSandwich();
-		Side side = (Side) sideComboBox.getValue();
+		Side side = (Side) sidesComboBox.getValue();
 		Flavor flavor = (Flavor) drinkComboBox.getValue();
 		Beverage drink = new Beverage(1, MEDIUM_DRINK, flavor);
 
@@ -198,8 +223,8 @@ public class ComboController {
 		drinkComboBox.getSelectionModel().select(Flavor.COLA);
 
 		ObservableList<Side> side = FXCollections.observableArrayList(Side.CHIPS, Side.APPLE_SLICES);
-		sideComboBox.setItems(side);
-		sideComboBox.getSelectionModel().select(Side.CHIPS);
+		sidesComboBox.setItems(side);
+		sidesComboBox.getSelectionModel().select(Side.CHIPS);
 
 		String imagePath = getClass().getResource("/image/brownBackground.jpg").toExternalForm();
 		mainBackground.setStyle("-fx-background-image: url('" + imagePath + "'); " +
