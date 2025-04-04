@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -19,10 +20,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
+
 
 
 /**
+ * This controller class manages the Current Order view in the application.
+ * It displays the current order, lets the user delete order items and allows
+ * the user to place their order.
  * @author Natalia Peguero, Olivia Kamau
  */
 public class CurrentOrderController {
@@ -38,6 +42,10 @@ public class CurrentOrderController {
 	private static Order currentOrder = null;
 
 
+	/**
+	 * Static method to get or create the current order
+	 * @return	the current order
+	 */
 	public static Order getCurrentOrder() {
 		if (currentOrder == null) {
 			currentOrder = new Order(1);
@@ -45,11 +53,21 @@ public class CurrentOrderController {
 		return currentOrder;
 	}
 
+	/**
+	 * Static method to set the current order
+	 * @param order	the current order
+	 */
 	public static void setCurrentOrder(Order order) {
 		currentOrder = order;
 	}
 
 
+
+	/**
+	 * Loads a new scene in the current stage
+	 * @param file	the FXML file name
+	 * @param title	the title of the scene window
+	 */
 	private void loadScene(String file, String title) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project4ruburger/" + file));
@@ -66,20 +84,34 @@ public class CurrentOrderController {
 		}
 	}
 
+	/**
+	 * Method to return to the main menu
+	 * @param actionEvent	the action event
+	 */
 	@FXML
 	private void backToMainMenu(ActionEvent actionEvent) {
 		loadScene("Main-view.fxml", "RU Burger - Main Menu");
 	}
 
+	/**
+	 * Method to go to the cart view
+	 * @param actionEvent	the action event
+	 */
 	@FXML
 	private void goToCart(ActionEvent actionEvent) {
 		loadScene("CurrentOrder-view.fxml", "RU Burger - Cart");
 	}
 
+	/**
+	 * Method to go to the orders view
+	 * @param actionEvent	the action event
+	 */
 	@FXML
 	private void goToOrders(ActionEvent actionEvent) {
 		loadScene("PlacedOrder-view.fxml", "RU Burger - Orders");
 	}
+
+
 
 	@FXML
 	private void uploadIcons(ImageView view, String file) {
@@ -93,6 +125,10 @@ public class CurrentOrderController {
 
 	}
 
+
+	/**
+	 * Updates the current order display and the totals in the ListView.
+	 */
 	private void updateOrderDisplay() {
 		if(currentOrder != null) {
 			ObservableList<MenuItem> itemsList = FXCollections.observableArrayList(currentOrder.getItems());
@@ -102,27 +138,25 @@ public class CurrentOrderController {
 			salesTax.setText(String.format("Sales Tax: $%.2f", currentOrder.getSalesTax()));
 			totalAmount.setText(String.format("Total: $%.2f", currentOrder.getTotalAmount()));
 		} else {
+
+      orderItemsListView.setItems(FXCollections.observableArrayList());
 			subtotal.setText("Subtotal: $0.00");
 			salesTax.setText("Sales Tax: $0.00");
 			totalAmount.setText("Total: $0.00");
-
-
-		}
+		  }
 
 		subtotal.setStyle("-fx-text-fill:white; -fx-font-family: 'Impact'; -fx-font-size: 16px;");
 		salesTax.setStyle("-fx-text-fill:white; -fx-font-family: 'Impact'; -fx-font-size: 16px;");
 		totalAmount.setStyle("-fx-text-fill:white; -fx-font-family: 'Impact'; -fx-font-size: 16px;");
 
-
 	}
-	/*public void selectOrder(MouseEvent mouseEvent) {
-	} */
+	
 
-	/*public void cancelOrder(ActionEvent actionEvent) {
-		currentOrder = new Order(currentOrder.getOrderNumber());
-		updateOrderDisplay();
-	}*/
 
+	/**
+	 * Removes the selected item from the order
+	 * @param actionEvent	the action event
+	 */
 	public void removeOrderItem(ActionEvent actionEvent) {
 		MenuItem selectedItem = orderItemsListView.getSelectionModel().getSelectedItem();
 		if (selectedItem != null) {
@@ -132,12 +166,33 @@ public class CurrentOrderController {
 		}
 	}
 
+	/**
+	 * Places the users current order
+	 * @param actionEvent	the action event
+	 */
 	public void placeOrder(ActionEvent actionEvent) {
-		currentOrder = new Order(currentOrder.getOrderNumber() + 1);
-		updateOrderDisplay();
+
+
+		if(currentOrder != null && !currentOrder.getItems().isEmpty()) {
+			PlacedOrderController.addPlacedOrder(currentOrder);
+
+			currentOrder = new Order(currentOrder.getOrderNumber() + 1);
+			updateOrderDisplay();
+
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setTitle("Order Placed");
+			alert.setHeaderText(null);
+			alert.setContentText("Your order has been placed!");
+			alert.showAndWait();
+		}
 	}
 
-	@FXML
+
+
+	/**
+	 * Initializes the controller
+	 */
+		@FXML
 	public void initialize() {
 		setUpIcons();
 		if (currentOrder == null) {
@@ -149,9 +204,8 @@ public class CurrentOrderController {
 		mainBackground.setStyle("-fx-background-image: url('" + imagePath + "'); " +
 				"-fx-background-size: cover; " +
 				"-fx-background-position: center;");
+
 	}
-
-
 
 
 
