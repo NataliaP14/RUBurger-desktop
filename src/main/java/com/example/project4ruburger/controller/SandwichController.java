@@ -150,6 +150,21 @@ public class SandwichController {
 		minus.setOnAction(this::decrease);
 
 		addToOrder.setOnAction(this::addSandwichToOrder);
+
+		breadComboBox.setOnMouseEntered(e -> {
+			ListCell<?> buttonCell = breadComboBox.getButtonCell();
+			if (buttonCell != null) {
+				buttonCell.setStyle("-fx-text-fill: white; -fx-background-color: #6e0512;");
+			}
+		});
+
+		breadComboBox.setOnMouseExited(e -> {
+			ListCell<?> buttonCell = breadComboBox.getButtonCell();
+			if (buttonCell != null) {
+				buttonCell.setStyle("-fx-text-fill: black; -fx-background-color: transparent;");
+			}
+		});
+
 	}
 
 	private void increase(ActionEvent actionEvent) {

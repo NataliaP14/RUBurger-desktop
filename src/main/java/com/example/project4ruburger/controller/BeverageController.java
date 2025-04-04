@@ -90,6 +90,35 @@ public class BeverageController {
 		minus.setOnAction(this::decrease);
 
 		addToOrder.setOnAction(this::addBeverageToOrder);
+
+		flavorComboBox.setOnMouseEntered(e -> {
+			ListCell<?> buttonCell = flavorComboBox.getButtonCell();
+			if (buttonCell != null) {
+				buttonCell.setStyle("-fx-text-fill: white; -fx-background-color: #6e0512;");
+			}
+		});
+
+		flavorComboBox.setOnMouseExited(e -> {
+			ListCell<?> buttonCell = flavorComboBox.getButtonCell();
+			if (buttonCell != null) {
+				buttonCell.setStyle("-fx-text-fill: black; -fx-background-color: transparent;");
+			}
+		});
+
+		sizeComboBox.setOnMouseEntered(e -> {
+			ListCell<?> buttonCell = sizeComboBox.getButtonCell();
+			if (buttonCell != null) {
+				buttonCell.setStyle("-fx-text-fill: white; -fx-background-color: #6e0512;");
+			}
+		});
+
+		sizeComboBox.setOnMouseExited(e -> {
+			ListCell<?> buttonCell = sizeComboBox.getButtonCell();
+			if (buttonCell != null) {
+				buttonCell.setStyle("-fx-text-fill: black; -fx-background-color: transparent;");
+			}
+		});
+
 	}
 
 	private void increase(ActionEvent actionEvent) {

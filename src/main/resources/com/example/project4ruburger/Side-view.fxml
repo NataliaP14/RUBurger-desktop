@@ -43,19 +43,18 @@
     <center>
         <StackPane>
             <VBox fx:id="mainBackground" prefHeight="700" prefWidth="900" style="-fx-background-color: #f4f4f4;">
-                <children>
-                    <Button fx:id="back" onAction="#backToMainMenu" styleClass="main-button" text="Main Menu"
-                            translateX="15" translateY="20">
-                        <graphic>
-                            <ImageView fx:id="backIcon" fitHeight="20" fitWidth="20" preserveRatio="true"
-                                       pickOnBounds="true" />
-                        </graphic>
-                    </Button>
-                </children></VBox>
+                <Button fx:id="back" onAction="#backToMainMenu" styleClass="main-button" text="Main Menu"
+                        translateX="15" translateY="20">
+                    <graphic>
+                        <ImageView fx:id="backIcon" fitHeight="20" fitWidth="20" preserveRatio="true"
+                                   pickOnBounds="true"/>
+                    </graphic>
+                </Button>
+            </VBox>
 
             <Rectangle fx:id="rectangle" arcHeight="40" arcWidth="40" fill="white" height="400" width="800">
                 <effect>
-                    <DropShadow color="rgba(0,0,0,0.4)" offsetX="5" offsetY="5" radius="5" />
+                    <DropShadow color="rgba(255,255,255,0.4)" offsetX="5" offsetY="5" radius="5" />
                 </effect>
             </Rectangle>
 
@@ -93,7 +92,7 @@
                             </Label>
                         </HBox>
                         <HBox alignment="TOP_LEFT" spacing="10">
-                            <ComboBox fx:id="sideComboBox" prefWidth="150.0" promptText="Flavors"/>
+                            <ComboBox styleClass="dropdown" fx:id="sideComboBox" prefWidth="150.0" promptText="Flavors"/>
                         </HBox>
 
                         <HBox alignment = "TOP_LEFT">
@@ -104,7 +103,7 @@
                             </Label>
                         </HBox>
                         <HBox alignment="TOP_LEFT" spacing="10">
-                            <ComboBox fx:id="sizeComboBox" prefWidth="150.0"/>
+                            <ComboBox styleClass="dropdown" fx:id="sizeComboBox" prefWidth="150.0"/>
                         </HBox>
 
                         <HBox>

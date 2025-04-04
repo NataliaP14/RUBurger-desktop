@@ -8,10 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -92,6 +89,35 @@ public class SideController {
 		minus.setOnAction(this::decrease);
 
 		addToOrder.setOnAction(this::addSideToOrder);
+
+		sizeComboBox.setOnMouseEntered(e -> {
+			ListCell<?> buttonCell = sizeComboBox.getButtonCell();
+			if (buttonCell != null) {
+				buttonCell.setStyle("-fx-text-fill: white; -fx-background-color: #6e0512;");
+			}
+		});
+
+		sizeComboBox.setOnMouseExited(e -> {
+			ListCell<?> buttonCell = sizeComboBox.getButtonCell();
+			if (buttonCell != null) {
+				buttonCell.setStyle("-fx-text-fill: black; -fx-background-color: transparent;");
+			}
+		});
+
+		sideComboBox.setOnMouseEntered(e -> {
+			ListCell<?> buttonCell = sideComboBox.getButtonCell();
+			if (buttonCell != null) {
+				buttonCell.setStyle("-fx-text-fill: white; -fx-background-color: #6e0512;");
+			}
+		});
+
+		sideComboBox.setOnMouseExited(e -> {
+			ListCell<?> buttonCell = sideComboBox.getButtonCell();
+			if (buttonCell != null) {
+				buttonCell.setStyle("-fx-text-fill: black; -fx-background-color: transparent;");
+			}
+		});
+
 	}
 
 	private void increase(ActionEvent actionEvent) {
