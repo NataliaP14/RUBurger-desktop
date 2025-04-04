@@ -44,36 +44,35 @@
 
 
     <center>
-        <VBox spacing="20" >
+        <VBox fx:id="mainBackground" spacing="20"  >
             <padding>
                 <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
             </padding>
             <Button fx:id="back" onAction="#backToMainMenu" styleClass="main-button" text="Main Menu"
-                    translateX="15" translateY="20">
+                    translateX="15" translateY="10">
                 <graphic>
                     <ImageView fx:id="backIcon" fitHeight="20" fitWidth="20" preserveRatio="true"
                                pickOnBounds="true" />
                 </graphic>
             </Button>
 
-            <HBox alignment="CENTER">
-                <Label text="Placed Orders" style="-fx-font-size: 36px; -fx-font-weight: bold;" />
-            </HBox>
-
-            <Label text="Select an Order:"/>
             <HBox spacing="10">
-                <ComboBox fx:id="orderDropdown" />
+                <ComboBox styleClass="orderDropdown" fx:id="orderDropdownComboBox" />
                 <Region HBox.hgrow="ALWAYS"/>
-                <Label fx:id="totalAmount" text="Total: $0.00" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                <Label fx:id="totalAmount" text="Total: $0.00" style="-fx-text-fill:white;">
+                    <font>
+                        <Font name="Impact" size="20.0" />
+                    </font>
+                </Label>
             </HBox>
 
-            <ListView fx:id="orderDetails" editable="false" prefHeight="900"/>
+            <ListView fx:id="orderDetails" editable="false" prefHeight="500.0" prefWidth="600.0"/>
 
 
 
             <HBox spacing="40" alignment="CENTER">
-                <Button fx:id="cancelOrder" text="Cancel Order" />
-                <Button fx:id="exportOrder" text="Export Orders" />
+                <Button fx:id="cancelOrder" text="Cancel Order"  styleClass="main-button" onAction="#handleCancelOrder"/>
+                <Button fx:id="exportOrder" text="Export Orders" styleClass="main-button"  onAction="#handleExportOrder"/>
             </HBox>
 
         </VBox>

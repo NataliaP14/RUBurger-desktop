@@ -10,7 +10,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser;
 
@@ -32,10 +34,15 @@ public class PlacedOrderController {
 	public Button cart;
 	public Button orders;
 	public ImageView backIcon;
+
 	@FXML private Button back, cancelOrder, exportOrder;
 	@FXML private Label totalAmount;
-	@FXML private ComboBox<Integer> orderDropdown;
 	@FXML private ListView<MenuItem> orderDetails;
+
+	public ComboBox orderDropdownComboBox;
+	public VBox mainBackground;
+
+
 
 	private static ArrayList<Order> placedOrders = new ArrayList<>();
 
@@ -85,6 +92,7 @@ public class PlacedOrderController {
 	}
 
 
+
 	/**
 	 * Adds an order to the placed orders list
 	 * @param order		the order to be added to the list.
@@ -99,16 +107,16 @@ public class PlacedOrderController {
 	 * Updates the order dropdown with the available order numbers
 	 */
 	@FXML
-	private void updateOrderDropdown() {
+	private void updateOrderDropdownComboBox() {
 		ObservableList<Integer> orderNumbers = FXCollections.observableArrayList();
 
 		for(Order order : placedOrders) {
 			orderNumbers.add(order.getOrderNumber());
 		}
-		orderDropdown.setItems(orderNumbers);
+		orderDropdownComboBox.setItems(orderNumbers);
 
 		if(!orderNumbers.isEmpty()) {
-			orderDropdown.setValue(orderNumbers.get(0));
+			orderDropdownComboBox.setValue(orderNumbers.get(0));
 			displaySelectedOrder();
 		} else {
 			orderDetails.setItems(FXCollections.observableArrayList());
@@ -122,7 +130,7 @@ public class PlacedOrderController {
 	 */
 	@FXML
 	private void displaySelectedOrder() {
-		Integer selectedOrderNumber = orderDropdown.getValue();
+		Integer selectedOrderNumber = (Integer) orderDropdownComboBox.getValue();
 		if (selectedOrderNumber != null) {
 			Order selectedOrder = findOrderByNumber(selectedOrderNumber);
 
@@ -158,7 +166,7 @@ public class PlacedOrderController {
 	 */
 	@FXML
 	private void handleCancelOrder(ActionEvent event) {
-		Integer selectedOrderNumber = orderDropdown.getValue();
+		Integer selectedOrderNumber = (Integer) orderDropdownComboBox.getValue();
 		if (selectedOrderNumber != null) {
 
 			for(int i = 0; i < placedOrders.size(); i++) {
@@ -167,7 +175,7 @@ public class PlacedOrderController {
 					break;
 				}
 			}
-			updateOrderDropdown();
+			updateOrderDropdownComboBox();
 
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
 			alert.setTitle("Order Cancelled");
@@ -234,14 +242,52 @@ public class PlacedOrderController {
 		}
 	}
 
+
+
+	private void setUpButtons() {
+		orderDropdownComboBox.setOnMouseEntered(e -> {
+			ListCell<?> buttonCell = orderDropdownComboBox.getButtonCell();
+			if (buttonCell != null) {
+				buttonCell.setStyle("-fx-text-fill: white; -fx-background-color: #6e0512;");
+			}
+		});
+
+		orderDropdownComboBox.setOnMouseExited(e -> {
+			ListCell<?> buttonCell = orderDropdownComboBox.getButtonCell();
+			if (buttonCell != null) {
+				buttonCell.setStyle("-fx-text-fill: black; -fx-background-color: transparent;");
+			}
+		});
+
+	}
+
+	@FXML
+	private void uploadIcons(ImageView view, String file) {
+		String imagePath = getClass().getResource("/image/" + file).toExternalForm();
+		view.setImage(new Image(imagePath));
+	}
+
+	private void setUpIcons() {
+		uploadIcons(backIcon, "Left.png");
+
+	}
+
+
 	/**
 	 * Initializes the controller
 	 */
 	@FXML
 	public void initialize() {
-		updateOrderDropdown();
+		updateOrderDropdownComboBox();
+		setUpIcons();
+		setUpButtons();
 
-		orderDropdown.setOnAction(event -> {displaySelectedOrder();});
+		String imagePath = getClass().getResource("/image/brownBackground.jpg").toExternalForm();
+		mainBackground.setStyle("-fx-background-image: url('" + imagePath + "'); " +
+				"-fx-background-size: cover; " +
+				"-fx-background-position: center;");
+
+		orderDropdownComboBox.setOnAction(event -> {displaySelectedOrder();});
 
 		cancelOrder.setOnAction(this::handleCancelOrder);
 		exportOrder.setOnAction(this::handleExportOrder);
