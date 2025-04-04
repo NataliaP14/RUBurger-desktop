@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class Burger extends Sandwich {
 	private boolean doublePatty;
-	private static final double DOUBLE_PATTY_PRICE = 2.50;
+	public static final double DOUBLE_PATTY_PRICE = 2.50;
 
 	/**
 	 * Constructs a burger object with the user's choices.
@@ -31,16 +31,15 @@ public class Burger extends Sandwich {
 	@Override
 	public double price() {
 
-		double totalPrice = super.price();
+		double totalPrice = protein.getPrice();
+		for(AddOns addOn : addOns) { totalPrice += addOn.getPrice(); }
 
 		if(doublePatty) {
 			totalPrice += DOUBLE_PATTY_PRICE;
 		}
 
-		for (AddOns addOn : addOns) {
+		totalPrice *= quantity;
 
-			totalPrice += addOn.getPrice();
-		}
 
 		return totalPrice;
 
