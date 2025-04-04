@@ -102,6 +102,8 @@ public class PlacedOrderController {
 		}
 		orderDropdownComboBox.setItems(orderNumbers);
 
+		orderDropdownComboBox.setStyle("-fx-text-fill:white;");
+
 		if(!orderNumbers.isEmpty()) {
 			orderDropdownComboBox.setValue(orderNumbers.get(0));
 			displaySelectedOrder();
@@ -232,7 +234,7 @@ public class PlacedOrderController {
 		orderDropdownComboBox.setOnMouseExited(e -> {
 			ListCell<?> buttonCell = orderDropdownComboBox.getButtonCell();
 			if (buttonCell != null) {
-				buttonCell.setStyle("-fx-text-fill: black; -fx-background-color: transparent;");
+				buttonCell.setStyle("-fx-text-fill: white; -fx-background-color: transparent;");
 			}
 		});
 
@@ -284,6 +286,30 @@ public class PlacedOrderController {
 
 		cancelOrder.setOnAction(this::handleCancelOrder);
 		exportOrder.setOnAction(this::handleExportOrder);
+
+		orderDropdownComboBox.setCellFactory(comboBox -> new ListCell<>() {
+			@Override
+			protected void updateItem(Object item, boolean empty) {
+				super.updateItem(item, empty);
+				if (empty || item == null) {
+					setText(null);
+				} else {
+					setText(item.toString());
+					setStyle("-fx-text-fill: white; -fx-background-color: #6e0512;");
+				}
+			}
+		});
+		orderDropdownComboBox.setButtonCell(new ListCell<>() {
+			@Override
+			protected void updateItem(Object item, boolean empty) {
+				super.updateItem(item, empty);
+				if (empty || item == null) {
+					setText(null);
+				} else {
+					setText(item.toString());
+					setStyle("-fx-text-fill: white; ");
+				}
+			}
+		});
 	}
-	
 }
