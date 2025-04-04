@@ -41,29 +41,33 @@
 
 
     <center>
-        <VBox spacing="20" >
+        <VBox fx:id="mainBackground" spacing="20" >
             <padding>
                 <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
             </padding>
-            <Button fx:id="back" onAction="#backToMainMenu" styleClass="main-button" text="Main Menu"
-                    translateX="15" translateY="20">
-                <graphic>
-                    <ImageView fx:id="backIcon" fitHeight="20" fitWidth="20" preserveRatio="true"
-                               pickOnBounds="true" />
-                </graphic>
-            </Button>
+            <HBox>
+                <Button fx:id="back" onAction="#backToMainMenu" styleClass="main-button" text="Main Menu"
+                        translateX="15" translateY="20">
+                    <graphic>
+                        <ImageView fx:id="backIcon" fitHeight="20" fitWidth="20" preserveRatio="true"
+                                   pickOnBounds="true" />
+                    </graphic>
+                </Button>
 
-            <VBox spacing="5">
-                <Label fx:id="subtotal" text="Subtotal: $0.00"/>
-                <Label fx:id="salesTax" text="Sales Tax: $0.00"/>
-                <Label fx:id="totalAmount" text="Total: $0.00"/>
-            </VBox>
+                <Region HBox.hgrow="ALWAYS" />
 
-            <ListView fx:id="orderItemsListView" editable="false" prefHeight="500.0" prefWidth="600.0"/>     <!-- onMouseClicked="#selectOrder" -->
+                <VBox spacing="5">
+                    <Label fx:id="subtotal" text="Subtotal: $0.00"/>
+                    <Label fx:id="salesTax" text="Sales Tax: $0.00"/>
+                    <Label fx:id="totalAmount" text="Total: $0.00"/>
+                </VBox>
+            </HBox>
+
+            <ListView fx:id="orderItemsListView" editable="false" prefHeight="500.0" prefWidth="600.0"/>
 
             <HBox spacing="10" alignment="CENTER">
-                <Button fx:id="removeOrderItem" text="Remove Order Item" onAction="#removeOrderItem"/>
-                <Button fx:id="placeOrder" text="Place Order" onAction="#placeOrder"/>
+                <Button fx:id="removeOrderItem" text="Remove Order Item" onAction="#removeOrderItem" styleClass="main-button"/>
+                <Button fx:id="placeOrder" text="Place Order" onAction="#placeOrder" styleClass="main-button"/>
             </HBox>
         </VBox>
 
