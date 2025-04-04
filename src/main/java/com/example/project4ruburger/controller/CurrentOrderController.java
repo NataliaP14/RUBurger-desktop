@@ -35,7 +35,7 @@ public class CurrentOrderController {
 	public ImageView backIcon;
 	public VBox mainBackground;
 	@FXML private Button back;
-	@FXML private Button removeOrderItem, placedOrder;
+	@FXML private Button removeOrderItem, placeOrder;
 	@FXML private Label subtotal, salesTax, totalAmount;
 	@FXML private ListView<MenuItem> orderItemsListView;
 
@@ -138,8 +138,7 @@ public class CurrentOrderController {
 			salesTax.setText(String.format("Sales Tax: $%.2f", currentOrder.getSalesTax()));
 			totalAmount.setText(String.format("Total: $%.2f", currentOrder.getTotalAmount()));
 		} else {
-
-      orderItemsListView.setItems(FXCollections.observableArrayList());
+			orderItemsListView.setItems(FXCollections.observableArrayList());
 			subtotal.setText("Subtotal: $0.00");
 			salesTax.setText("Sales Tax: $0.00");
 			totalAmount.setText("Total: $0.00");
@@ -149,8 +148,13 @@ public class CurrentOrderController {
 		salesTax.setStyle("-fx-text-fill:white; -fx-font-family: 'Impact'; -fx-font-size: 16px;");
 		totalAmount.setStyle("-fx-text-fill:white; -fx-font-family: 'Impact'; -fx-font-size: 16px;");
 
+		subtotal.setStyle("-fx-text-fill:white; -fx-font-family: 'Impact'; -fx-font-size: 16px;");
+		salesTax.setStyle("-fx-text-fill:white; -fx-font-family: 'Impact'; -fx-font-size: 16px;");
+		totalAmount.setStyle("-fx-text-fill:white; -fx-font-family: 'Impact'; -fx-font-size: 16px;");
+
 	}
 	
+
 
 
 	/**

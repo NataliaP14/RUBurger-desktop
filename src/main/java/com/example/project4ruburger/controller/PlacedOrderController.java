@@ -9,10 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -40,13 +37,12 @@ public class PlacedOrderController {
 
 	@FXML private Button back, cancelOrder, exportOrder;
 	@FXML private Label totalAmount;
-	@FXML private ComboBox<Integer> orderDropdown;
 	@FXML private ListView<MenuItem> orderDetails;
 
-	//public ComboBox orderDropdownComboBox;
+
+	public ComboBox orderDropdownComboBox;
 	public VBox mainBackground;
-	@FXML
-	private Button back;
+
 
 
 	private static ArrayList<Order> placedOrders = new ArrayList<>();
@@ -112,16 +108,16 @@ public class PlacedOrderController {
 	 * Updates the order dropdown with the available order numbers
 	 */
 	@FXML
-	private void updateOrderDropdown() {
+	private void updateOrderDropdownComboBox() {
 		ObservableList<Integer> orderNumbers = FXCollections.observableArrayList();
 
 		for(Order order : placedOrders) {
 			orderNumbers.add(order.getOrderNumber());
 		}
-		orderDropdown.setItems(orderNumbers);
+		orderDropdownComboBox.setItems(orderNumbers);
 
 		if(!orderNumbers.isEmpty()) {
-			orderDropdown.setValue(orderNumbers.get(0));
+			orderDropdownComboBox.setValue(orderNumbers.get(0));
 			displaySelectedOrder();
 		} else {
 			orderDetails.setItems(FXCollections.observableArrayList());
@@ -135,7 +131,7 @@ public class PlacedOrderController {
 	 */
 	@FXML
 	private void displaySelectedOrder() {
-		Integer selectedOrderNumber = orderDropdown.getValue();
+		Integer selectedOrderNumber = (Integer) orderDropdownComboBox.getValue();
 		if (selectedOrderNumber != null) {
 			Order selectedOrder = findOrderByNumber(selectedOrderNumber);
 
@@ -171,7 +167,7 @@ public class PlacedOrderController {
 	 */
 	@FXML
 	private void handleCancelOrder(ActionEvent event) {
-		Integer selectedOrderNumber = orderDropdown.getValue();
+		Integer selectedOrderNumber = (Integer) orderDropdownComboBox.getValue();
 		if (selectedOrderNumber != null) {
 
 			for(int i = 0; i < placedOrders.size(); i++) {
@@ -180,7 +176,7 @@ public class PlacedOrderController {
 					break;
 				}
 			}
-			updateOrderDropdown();
+			updateOrderDropdownComboBox();
 
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
 			alert.setTitle("Order Cancelled");
@@ -277,14 +273,15 @@ public class PlacedOrderController {
 
 	}
 
-  
-  /**
+
+
+	/**
 	 * Initializes the controller
 	 */
 	@FXML
 	public void initialize() {
-		updateOrderDropdown();
-    setUpIcons();
+		updateOrderDropdownComboBox();
+		setUpIcons();
 		setUpButtons();
 
 		String imagePath = getClass().getResource("/image/brownBackground.jpg").toExternalForm();
@@ -292,7 +289,7 @@ public class PlacedOrderController {
 				"-fx-background-size: cover; " +
 				"-fx-background-position: center;");
 
-		orderDropdown.setOnAction(event -> {displaySelectedOrder();});
+		orderDropdownComboBox.setOnAction(event -> {displaySelectedOrder();});
 
 		cancelOrder.setOnAction(this::handleCancelOrder);
 		exportOrder.setOnAction(this::handleExportOrder);

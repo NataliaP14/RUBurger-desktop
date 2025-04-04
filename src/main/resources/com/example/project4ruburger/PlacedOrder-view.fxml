@@ -71,8 +71,10 @@
 
 
             <HBox spacing="40" alignment="CENTER">
-                <Button fx:id="cancelOrder" text="Cancel Order"  styleClass="main-button"/>
-                <Button fx:id="exportOrder" text="Export Orders" styleClass="main-button" />
+
+                <Button fx:id="cancelOrder" text="Cancel Order"  styleClass="main-button" onAction="#handleCancelOrder"/>
+                <Button fx:id="exportOrder" text="Export Orders" styleClass="main-button"  onAction="#handleExportOrder"/>
+
             </HBox>
 
         </VBox>
