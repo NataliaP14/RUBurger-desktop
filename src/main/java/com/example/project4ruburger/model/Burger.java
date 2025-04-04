@@ -30,18 +30,14 @@ public class Burger extends Sandwich {
 	 */
 	@Override
 	public double price() {
+		double totalPrice = super.price();
 
-		double totalPrice = protein.getPrice();
-		for(AddOns addOn : addOns) { totalPrice += addOn.getPrice(); }
-
-		if(doublePatty) {
-			totalPrice += DOUBLE_PATTY_PRICE;
+		if (doublePatty) {
+			totalPrice += DOUBLE_PATTY_PRICE * quantity;
 		}
 
-		totalPrice *= quantity;
-
-
 		return totalPrice;
+
 
 	}
 

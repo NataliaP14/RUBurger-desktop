@@ -31,8 +31,8 @@
 
             <Region HBox.hgrow="ALWAYS" />
 
-            <Button fx:id="cart" onAction="#goToCart" styleClass="nav-button" text="Cart" />
-            <Button fx:id="orders" onAction="#goToOrders" styleClass="nav-button" text="My Orders" />
+            <Button onAction="#goToCart" styleClass="nav-button" text="Cart" />
+            <Button onAction="#goToOrders" styleClass="nav-button" text="My Orders" />
         </HBox>
     </top>
 
@@ -48,7 +48,7 @@
                 </Button>
             </VBox>
 
-            <Rectangle fx:id="rectangle" fill="white" arcHeight="40" arcWidth="40" height="400" width="800">
+            <Rectangle fill="white" arcHeight="40" arcWidth="40" height="400" width="800">
                 <effect>
                     <DropShadow color="rgba(255,255,255,0.4)" offsetX="5" offsetY="5" radius="5" />
                 </effect>

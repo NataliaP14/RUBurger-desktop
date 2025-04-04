@@ -13,11 +13,8 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.effect.GaussianBlur?>
-<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.ImageView?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" stylesheets="@main.css" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project4ruburger.controller.MainController">
 
@@ -35,8 +32,8 @@
 
             <Region HBox.hgrow="ALWAYS" />
 
-            <Button fx:id = "cart" text="Cart" onAction="#goToCart" styleClass="nav-button"/>
-            <Button fx:id = "orders" text="My Orders" onAction="#goToOrders" styleClass="nav-button" />
+            <Button text="Cart" onAction="#goToCart" styleClass="nav-button"/>
+            <Button text="My Orders" onAction="#goToOrders" styleClass="nav-button" />
         </HBox>
     </top>
 
@@ -77,7 +74,7 @@
 
 
                 <StackPane fx:id = "sandwichBox" GridPane.columnIndex="1" GridPane.rowIndex="0" >
-                    <Rectangle fx:id="sandwichRectangle" fill="#fffefa" height="275" width="350" arcWidth="40" arcHeight="40">
+                    <Rectangle fill="#fffefa" height="275" width="350" arcWidth="40" arcHeight="40">
                         <effect>
                             <DropShadow radius="5" offsetX="5" offsetY="5" color="rgba(255, 255, 255, 0.4)" />
                         </effect>

@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
@@ -13,11 +12,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ComboBox?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" stylesheets="@main.css" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project4ruburger.controller.SideController">
 
@@ -35,8 +30,8 @@
 
             <Region HBox.hgrow="ALWAYS" />
 
-            <Button fx:id = "cart" text="Cart" onAction="#goToCart" styleClass="nav-button"/>
-            <Button fx:id = "orders" text="My Orders" onAction="#goToOrders" styleClass="nav-button" />
+            <Button text="Cart" onAction="#goToCart" styleClass="nav-button"/>
+            <Button text="My Orders" onAction="#goToOrders" styleClass="nav-button" />
         </HBox>
     </top>
 
@@ -52,7 +47,7 @@
                 </Button>
             </VBox>
 
-            <Rectangle fx:id="rectangle" arcHeight="40" arcWidth="40" fill="white" height="400" width="800">
+            <Rectangle arcHeight="40" arcWidth="40" fill="white" height="400" width="800">
                 <effect>
                     <DropShadow color="rgba(255,255,255,0.4)" offsetX="5" offsetY="5" radius="5" />
                 </effect>

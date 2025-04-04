@@ -1,6 +1,7 @@
 package com.example.project4ruburger.model;
 
 /**
+ * This class is an abtract class that represents the menu items
  * @author Natalia Peguero, Olivia Kamau
  */
 public abstract class MenuItem {

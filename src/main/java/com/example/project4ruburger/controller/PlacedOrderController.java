@@ -36,25 +36,18 @@ import java.util.ArrayList;
  * @author Natalia Peguero, Olivia Kamau
  */
 public class PlacedOrderController {
-	public Button cart;
-	public Button orders;
-	public ImageView backIcon;
-
+	@FXML private ImageView backIcon;
 	@FXML private Button back, cancelOrder, exportOrder;
 	@FXML private Label totalAmount;
 	@FXML private ListView<MenuItem> orderDetails;
-
-
-	public ComboBox orderDropdownComboBox;
-	public VBox mainBackground;
-
-
+	@FXML private ComboBox orderDropdownComboBox;
+	@FXML private VBox mainBackground;
 
 	private static ArrayList<Order> placedOrders = new ArrayList<>();
 
 
 	/**
-	 * Loads a new scene in the current stage
+	 * Loads a new scene to switch views
 	 * @param file	the FXML file name
 	 * @param title		the title for the scene window
 	 */
@@ -96,18 +89,6 @@ public class PlacedOrderController {
 	private void goToOrders(ActionEvent actionEvent) {
 		loadScene("PlacedOrder-view.fxml", "RU Burger - Orders");
 	}
-
-
-
-	/**
-	 * Adds an order to the placed orders list
-	 * @param order		the order to be added to the list.
-	 */
-	@FXML
-	public static void addPlacedOrder(Order order) {
-		placedOrders.add(order);
-	}
-
 
 	/**
 	 * Updates the order dropdown with the available order numbers
@@ -151,7 +132,7 @@ public class PlacedOrderController {
 
 	/**
 	 * Finds an order by its respective order number
-	 * @param orderNumber	the order that that you are searching for
+	 * @param orderNumber	the order that you are searching for
 	 * @return		Returns the order number if it's found,
 	 * 				otherwise returns null.
 	 */
@@ -216,29 +197,18 @@ public class PlacedOrderController {
 		if (file != null) {
 
 			try (FileWriter writer = new FileWriter(file)) {
-
-				writer.write("RU Burger Orders: \n");
-				writer.write("-------------------\n");
-
+				writer.write("RU Burger Orders: \n"); writer.write("-------------------\n");
 				for(Order order : placedOrders) {
-					writer.write("Order #" + order.getOrderNumber() + "\n");
-					writer.write("\tItems:\n");
-
+					writer.write("Order #" + order.getOrderNumber() + "\n"); writer.write("\tItems:\n");
 					for(MenuItem item : order.getItems()) {
 						writer.write("\t- " + item.toString() + "\n");
 					}
 
-					writer.write("\n\tSubtotal: $" + String.format("%.2f", order.getSubTotal()));
-					writer.write("\n\tSales Tax: $" + String.format("%.2f", order.getSalesTax()));
-					writer.write("\n\tTotal: $" + String.format("%.2f", order.getTotalAmount()));
-					writer.write("\n\n\n");
-
+					writer.write("\n\tSubtotal: $" + String.format("%.2f", order.getSubTotal()));writer.write("\n\tSales Tax: $" + String.format("%.2f", order.getSalesTax()));
+					writer.write("\n\tTotal: $" + String.format("%.2f", order.getTotalAmount()));writer.write("\n\n\n");
 				}
 
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
+			} catch (IOException e) { e.printStackTrace(); }
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
 			alert.setTitle("Orders Exported");
 			alert.setHeaderText(null);
@@ -248,8 +218,9 @@ public class PlacedOrderController {
 		}
 	}
 
-
-
+	/**
+	 * Sets up the buttons of the order drop down
+	 */
 	private void setUpButtons() {
 		orderDropdownComboBox.setOnMouseEntered(e -> {
 			ListCell<?> buttonCell = orderDropdownComboBox.getButtonCell();
@@ -267,18 +238,33 @@ public class PlacedOrderController {
 
 	}
 
+	/**
+	 * uploads the icons to the placed order view
+	 * @param view the view to upload to
+	 * @param file the file of the icon
+	 */
 	@FXML
 	private void uploadIcons(ImageView view, String file) {
 		String imagePath = getClass().getResource("/image/" + file).toExternalForm();
 		view.setImage(new Image(imagePath));
 	}
 
+	/**
+	 * Sets up the icons
+	 */
 	private void setUpIcons() {
 		uploadIcons(backIcon, "Left.png");
 
 	}
 
-
+	/**
+	 * Adds an order to the placed orders list
+	 * @param order		the order to be added to the list.
+	 */
+	@FXML
+	public static void addPlacedOrder(Order order) {
+		placedOrders.add(order);
+	}
 
 	/**
 	 * Initializes the controller

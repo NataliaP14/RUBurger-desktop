@@ -1,6 +1,11 @@
 package com.example.project4ruburger.controller;
 
-import com.example.project4ruburger.model.*;
+import com.example.project4ruburger.model.Beverage;
+import com.example.project4ruburger.model.Side;
+import com.example.project4ruburger.model.Sandwich;
+import com.example.project4ruburger.model.Combo;
+import com.example.project4ruburger.model.Size;
+import com.example.project4ruburger.model.Flavor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,40 +22,48 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
+ *  The combo controller handles all the actions of the combo page, which creates the combo
+ *  * based off the user customization
  * @author Natalia Peguero, Olivia Kamau
  */
 public class ComboController {
-	public Button cart;
-	public Button orders;
-	public ComboBox sidesComboBox;
-	public ImageView sideIcon;
-	public ComboBox drinkComboBox;
-	public ImageView drinkIcon;
-	public Button minus;
-	public ImageView minusIcon;
-	public Label number;
-	public Button plus;
-	public ImageView plusIcon;
-	public Label price;
-	public Button addToOrder;
-	public ImageView comboIcon;
-	public Label sandwichDetails;
-	public VBox mainBackground;
-	public ImageView backIcon;
+	@FXML private ComboBox sidesComboBox;
+	@FXML private ImageView sideIcon;
+	@FXML private ComboBox drinkComboBox;
+	@FXML private ImageView drinkIcon;
+	@FXML private Button minus;
+	@FXML private ImageView minusIcon;
+	@FXML private Label number;
+	@FXML private Button plus;
+	@FXML private ImageView plusIcon;
+	@FXML private Label price;
+	@FXML private Button addToOrder;
+	@FXML private ImageView comboIcon;
+	@FXML private VBox mainBackground;
+	@FXML private ImageView backIcon;
 	@FXML private Button back;
+
 
 	private int quantity;
 	private Combo combo;
 	private static final Size MEDIUM_DRINK = Size.MEDIUM;
 
+	public Label sandwichDetails;
+
+	/**
+	 * Sets the combo to the corresponding combo based off sandwich or burger
+	 * @param combo the combo to set
+	 */
 	public void setCombo(Combo combo) {
 		this.combo = combo;
-		//initialize();
 		priceUpdater();
 	}
 
-
-
+	/**
+	 * Loads a new scene based on the corresponding view
+	 * @param file the view file to switch to
+	 * @param title the title name to set based on the view
+	 */
 	private void loadScene(String file, String title) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project4ruburger/" + file));
@@ -63,27 +76,47 @@ public class ComboController {
 		}
 	}
 
+	/**
+	 * Switches back to main menu
+	 * @param actionEvent event handler
+	 */
 	@FXML
 	private void backToMainMenu(ActionEvent actionEvent) {
 		loadScene("Main-view.fxml", "RU Burger - Main Menu");
 	}
 
+	/**
+	 * Switches to the currentOrder view
+	 * @param actionEvent event handler
+	 */
 	@FXML
 	private void goToCart(ActionEvent actionEvent) {
 		loadScene("CurrentOrder-view.fxml", "RU Burger - Cart");
 	}
 
+	/**
+	 * Switches to the PlacedOrder view
+	 * @param actionEvent event handler
+	 */
 	@FXML
 	private void goToOrders(ActionEvent actionEvent) {
 		loadScene("PlacedOrder-view.fxml", "RU Burger - Orders");
 	}
 
+	/**
+	 * Uploads the icons to the view
+	 * @param view the view to upload to
+	 * @param file the file of the icon
+	 */
 	@FXML
 	private void uploadIcons(ImageView view, String file) {
 		String imagePath = getClass().getResource("/image/" + file).toExternalForm();
 		view.setImage(new Image(imagePath));
 	}
 
+	/**
+	 * Sets up the icons to the view and sets the style of the minus and plus button
+	 */
 	private void setUpIcons() {
 		minus.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
 		plus.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
@@ -97,6 +130,9 @@ public class ComboController {
 
 	}
 
+	/**
+	 * Dynamically changes the icons of the flavor and side based off user selection
+	 */
 	private void changeIcons() {
 		Flavor flavor = (Flavor) drinkComboBox.getSelectionModel().getSelectedItem();
 		Side side = (Side) sidesComboBox.getSelectionModel().getSelectedItem();
@@ -113,7 +149,9 @@ public class ComboController {
 		}
 	}
 
-
+	/**
+	 * Sets up the buttons by setting the action
+	 */
 	private void setUpButtons() {
 		drinkComboBox.setOnAction(e->{
 			priceUpdater();
@@ -158,11 +196,19 @@ public class ComboController {
 		});
 	}
 
+	/**
+	 * Increase the quantity of item
+	 * @param actionEvent event handler
+	 */
 	private void increase(ActionEvent actionEvent) {
 		quantity++;
 		updateQuantity();
 	}
 
+	/**
+	 * Decrease the quantity of the item
+	 * @param actionEvent event handler
+	 */
 	private void decrease(ActionEvent actionEvent) {
 		if (quantity > 1) {
 			quantity--;
@@ -170,11 +216,17 @@ public class ComboController {
 		updateQuantity();
 	}
 
+	/**
+	 * Dynamically updates the quantity of the item
+	 */
 	private void updateQuantity() {
 		number.setText(String.valueOf(quantity));
 		priceUpdater();
 	}
 
+	/**
+	 * Creates the combo object to dynamically update the price of the combo
+	 */
 	private void priceUpdater() {
 		Flavor flavor = (Flavor) drinkComboBox.getSelectionModel().getSelectedItem();
 		Side side = (Side) sidesComboBox.getSelectionModel().getSelectedItem();
@@ -191,6 +243,10 @@ public class ComboController {
 
 	}
 
+	/**
+	 * Adds the combo to current order and sets the alert when user clicks place order button
+	 * @param event event handler
+	 */
 	@FXML
 	private void addComboToOrder(ActionEvent event) {
 		Sandwich sandwich = combo.getSandwich();
@@ -208,6 +264,9 @@ public class ComboController {
 		alert.showAndWait();
 	}
 
+	/**
+	 * initialization function that sets up the data and functions when the program runs
+	 */
 	@FXML
 	public void initialize() {
 		setUpIcons();
@@ -232,6 +291,5 @@ public class ComboController {
 				"-fx-background-position: center;");
 
 	}
-
 
 }

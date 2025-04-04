@@ -1,6 +1,8 @@
 package com.example.project4ruburger.controller;
 
-import com.example.project4ruburger.model.*;
+import com.example.project4ruburger.model.Side;
+import com.example.project4ruburger.model.Size;
+import com.example.project4ruburger.model.Sides;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,28 +19,32 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
+ *  The side controller handles all the actions of the side page, which creates the side
+ *  based off the user customization
  * @author Natalia Peguero, Olivia Kamau
  */
 public class SideController {
-	public Button cart;
-	public Button orders;
-	public ImageView sideIcon;
-	public ComboBox sideComboBox;
-	public ComboBox sizeComboBox;
-	public Button minus;
-	public ImageView minusIcon;
-	public Label number;
-	public Button plus;
-	public ImageView plusIcon;
-	public Label price;
-	public Button addToOrder;
-	public VBox mainBackground;
-	public ImageView backIcon;
+	@FXML private ImageView sideIcon;
+	@FXML private ComboBox sideComboBox;
+	@FXML private ComboBox sizeComboBox;
+	@FXML private Button minus;
+	@FXML private ImageView minusIcon;
+	@FXML private Label number;
+	@FXML private Button plus;
+	@FXML private ImageView plusIcon;
+	@FXML private Label price;
+	@FXML private Button addToOrder;
+	@FXML private VBox mainBackground;
+	@FXML private ImageView backIcon;
 	@FXML private Button back;
 
 	private int quantity;
 
-
+	/**
+	 * Loads to a new scene
+	 * @param file the view file to load
+	 * @param title the title to set the view to
+	 */
 	private void loadScene(String file, String title) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/project4ruburger/" + file));
@@ -51,27 +57,47 @@ public class SideController {
 		}
 	}
 
+	/**
+	 * switches back to the main menu
+	 * @param actionEvent event handler
+	 */
 	@FXML
 	private void backToMainMenu(ActionEvent actionEvent) {
 		loadScene("Main-view.fxml", "RU Burger - Main Menu");
 	}
 
+	/**
+	 * switches to the current order view
+	 * @param actionEvent event handler
+	 */
 	@FXML
 	private void goToCart(ActionEvent actionEvent) {
 		loadScene("CurrentOrder-view.fxml", "RU Burger - Cart");
 	}
 
+	/**
+	 * Switches to the placed order view
+	 * @param actionEvent event handler
+	 */
 	@FXML
 	private void goToOrders(ActionEvent actionEvent) {
 		loadScene("PlacedOrder-view.fxml", "RU Burger - Orders");
 	}
 
+	/**
+	 * Uploads the icon
+	 * @param view the view to upload the icon to
+	 * @param file the file of the icon
+	 */
 	@FXML
 	private void uploadIcons(ImageView view, String file) {
 		String imagePath = getClass().getResource("/image/" + file).toExternalForm();
 		view.setImage(new Image(imagePath));
 	}
 
+	/**
+	 * Sets up the icon
+	 */
 	private void setUpIcons() {
 		minus.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
 		plus.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
@@ -82,6 +108,9 @@ public class SideController {
 		uploadIcons(backIcon, "Left.png");
 	}
 
+	/**
+	 * Sets up the buttons
+	 */
 	private void setUpButtons() {
 		sizeComboBox.setOnAction(e->priceUpdater());
 		sideComboBox.setOnAction(e->priceUpdater());
@@ -120,11 +149,19 @@ public class SideController {
 
 	}
 
+	/**
+	 * Increase the quantity
+	 * @param actionEvent event handler
+	 */
 	private void increase(ActionEvent actionEvent) {
 		quantity++;
 		updateQuantity();
 	}
 
+	/**
+	 * Decrease the quantity
+	 * @param actionEvent event handler
+	 */
 	private void decrease(ActionEvent actionEvent) {
 		if (quantity > 1) {
 			quantity--;
@@ -132,11 +169,17 @@ public class SideController {
 		updateQuantity();
 	}
 
+	/**
+	 * Dynamically updates the quantity
+	 */
 	private void updateQuantity() {
 		number.setText(String.valueOf(quantity));
 		priceUpdater();
 	}
 
+	/**
+	 * Dynamically updates the price through creating a new Side object and geting the price
+	 */
 	private void priceUpdater() {
 		Size size = (Size) sizeComboBox.getSelectionModel().getSelectedItem();
 		Side side = (Side) sideComboBox.getSelectionModel().getSelectedItem();
@@ -150,6 +193,10 @@ public class SideController {
 
 	}
 
+	/**
+	 * Adds the side to the order to currentOrder
+	 * @param event event handler
+	 */
 	@FXML
 	private void addSideToOrder(ActionEvent event) {
 		Side side = (Side) sideComboBox.getValue();
@@ -165,6 +212,9 @@ public class SideController {
 		alert.showAndWait();
 	}
 
+	/**
+	 * Initializes the functions and data from the controller
+	 */
 	@FXML
 	public void initialize() {
 		setUpIcons();
