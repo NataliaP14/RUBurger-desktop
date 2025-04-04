@@ -48,7 +48,7 @@
             </Button>
 
             <HBox spacing="10">
-                <ComboBox styleClass="orderDropdown" fx:id="orderDropdownComboBox" />
+                <ComboBox styleClass="orderDropdown" fx:id="orderDropdownComboBox" style="-fx-fill:white;"/>
                 <Region HBox.hgrow="ALWAYS"/>
                 <Label fx:id="totalAmount" text="Total: $0.00" style="-fx-text-fill:white;">
                     <font>
