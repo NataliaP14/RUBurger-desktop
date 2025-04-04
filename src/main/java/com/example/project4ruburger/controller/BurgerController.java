@@ -204,9 +204,10 @@ public class BurgerController {
 		boolean isDouble = doublePatty.isSelected();
 		Bread bread = breadSelect();
 		ArrayList<AddOns> addOns = addOnsSelect();
-		//quantity = Integer.parseInt(number.getText());
+
 
 		Burger burger = new Burger(bread, addOns, quantity, isDouble);
+
 		double total = burger.price();
 
 		price.setText(String.format("Price: $%.2f", total));

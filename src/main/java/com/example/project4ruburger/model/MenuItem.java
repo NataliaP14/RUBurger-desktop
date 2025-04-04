@@ -6,6 +6,7 @@ package com.example.project4ruburger.model;
 public abstract class MenuItem {
 	protected int quantity;
 
+
 	/**
 	 * Gets the price of the menu item.
 	 * @return	The price of the menu item.
@@ -19,4 +20,5 @@ public abstract class MenuItem {
 	public MenuItem(int quantity) {
 		this.quantity = quantity;
 	}
+
 }
