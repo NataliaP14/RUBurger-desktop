@@ -179,7 +179,7 @@ public class ComboController {
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setTitle("Item Added");
 		alert.setHeaderText(null);
-		alert.setContentText("Side added to your order!");
+		alert.setContentText("Combo added to your order!");
 		alert.showAndWait();
 	}
 
