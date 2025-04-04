@@ -138,18 +138,22 @@ public class CurrentOrderController {
 			salesTax.setText(String.format("Sales Tax: $%.2f", currentOrder.getSalesTax()));
 			totalAmount.setText(String.format("Total: $%.2f", currentOrder.getTotalAmount()));
 		} else {
-
 			orderItemsListView.setItems(FXCollections.observableArrayList());
 			subtotal.setText("Subtotal: $0.00");
 			salesTax.setText("Sales Tax: $0.00");
 			totalAmount.setText("Total: $0.00");
-		}
+		  }
+
+		subtotal.setStyle("-fx-text-fill:white; -fx-font-family: 'Impact'; -fx-font-size: 16px;");
+		salesTax.setStyle("-fx-text-fill:white; -fx-font-family: 'Impact'; -fx-font-size: 16px;");
+		totalAmount.setStyle("-fx-text-fill:white; -fx-font-family: 'Impact'; -fx-font-size: 16px;");
 
 		subtotal.setStyle("-fx-text-fill:white; -fx-font-family: 'Impact'; -fx-font-size: 16px;");
 		salesTax.setStyle("-fx-text-fill:white; -fx-font-family: 'Impact'; -fx-font-size: 16px;");
 		totalAmount.setStyle("-fx-text-fill:white; -fx-font-family: 'Impact'; -fx-font-size: 16px;");
 
 	}
+	
 
 
 
@@ -192,7 +196,7 @@ public class CurrentOrderController {
 	/**
 	 * Initializes the controller
 	 */
-	@FXML
+		@FXML
 	public void initialize() {
 		setUpIcons();
 		if (currentOrder == null) {

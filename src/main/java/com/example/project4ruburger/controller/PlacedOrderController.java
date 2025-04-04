@@ -39,6 +39,7 @@ public class PlacedOrderController {
 	@FXML private Label totalAmount;
 	@FXML private ListView<MenuItem> orderDetails;
 
+
 	public ComboBox orderDropdownComboBox;
 	public VBox mainBackground;
 
@@ -273,6 +274,7 @@ public class PlacedOrderController {
 	}
 
 
+
 	/**
 	 * Initializes the controller
 	 */
@@ -292,5 +294,5 @@ public class PlacedOrderController {
 		cancelOrder.setOnAction(this::handleCancelOrder);
 		exportOrder.setOnAction(this::handleExportOrder);
 	}
-
+	
 }
